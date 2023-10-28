@@ -1,10 +1,11 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 
 export default function HomePage() {
   return (
-    <div>
-      <h1>Trang Chu</h1>
-    </div>
+    <Box sx={{display:'flex'}}>
+      <Typography variant='h2'>TRANG CHỦ</Typography>
+    </Box>
   );
 }
 
