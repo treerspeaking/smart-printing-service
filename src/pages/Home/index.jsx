@@ -1,11 +1,29 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import React from 'react';
+import { PrintReqeust } from './PrintReqeust';
+import DateCalendarValue from './DateTime';
 
 export default function HomePage() {
   return (
-    <Box sx={{display:'flex'}}>
-      <Typography variant='h2'>TRANG CHỦ</Typography>
-    </Box>
+    <Stack direction={'column'} spacing={10}>
+
+      <Stack direction={'row'}>
+        <Stack direction="column" spacing={'260px'} sx={{ width: '920px' }}>
+          <Typography variant='h2'>TRANG CHỦ</Typography>
+          <PrintReqeust></PrintReqeust>
+        </Stack>
+        <DateCalendarValue edge='end'></DateCalendarValue>
+
+        
+      </Stack>
+    
+      
+       
+    </Stack>
+
+
+
+
   );
 }
 
