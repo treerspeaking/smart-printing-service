@@ -2,7 +2,7 @@ import { Box, Typography, Stack } from '@mui/material';
 import React from 'react';
 import { PrintReqeust } from './PrintReqeust';
 import DateCalendarValue from './DateTime';
-import { SummaryTable } from './SummaryTable';
+
 import ColumnGroupingTable from './Table';
 export default function HomePage() {
   return (
@@ -13,7 +13,7 @@ export default function HomePage() {
           <Typography variant='h2'>TRANG CHỦ</Typography>
           <PrintReqeust></PrintReqeust>
         </Stack>
-        <DateCalendarValue edge='end'></DateCalendarValue>
+        <DateCalendarValue ></DateCalendarValue>
 
       </Stack>
       {/* <SummaryTable></SummaryTable> */}
