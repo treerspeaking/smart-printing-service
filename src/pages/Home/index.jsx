@@ -1,6 +1,6 @@
 import { Box, Typography, Stack } from '@mui/material';
 import React from 'react';
-import { PrintReqeust } from './PrintReqeust';
+import { PrintRequest } from './PrintRequest';
 import DateCalendarValue from './DateTime';
 
 import ColumnGroupingTable from './Table';
@@ -11,7 +11,7 @@ export default function HomePage() {
       <Stack direction={'row'}>
         <Stack direction="column" spacing={'200px'} sx={{ width: '793px' }}>
           <Typography variant='h2'>TRANG CHỦ</Typography>
-          <PrintReqeust></PrintReqeust>
+          <PrintRequest></PrintRequest>
         </Stack>
         <DateCalendarValue ></DateCalendarValue>
 
