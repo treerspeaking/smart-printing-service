@@ -9,7 +9,7 @@ export default function HomePage() {
     <Stack direction={'column'} spacing={10}>
 
       <Stack direction={'row'}>
-        <Stack direction="column" spacing={'260px'} sx={{ width: '920px' }}>
+        <Stack direction="column" spacing={'200px'} sx={{ width: '793px' }}>
           <Typography variant='h2'>TRANG CHỦ</Typography>
           <PrintReqeust></PrintReqeust>
         </Stack>

@@ -11,7 +11,7 @@ export default function DateCalendarValue() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         
-          <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{backgroundColor:"#E9E7EB", borderRadius:10}} />
+          <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{backgroundColor:"#E9E7EB", borderRadius:10,maxHeight:'80%'}} />
         
       
     </LocalizationProvider>
