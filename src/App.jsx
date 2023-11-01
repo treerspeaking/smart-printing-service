@@ -1,3 +1,4 @@
+import React from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import HomePage from './pages/Home'
 import HistoryPage from './pages/History'
@@ -5,7 +6,7 @@ import FeedbackPage from './pages/Feedback'
 import LoginPage from './pages/Login'
 import PaymentPage from './pages/Payment'
 import PrintRequestPage from './pages/PrintRequest'
-import Root from './component/root'
+import Root from './components/root'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/ThanhToan" element={<PaymentPage/>} />
             <Route path="/PhanHoi" element={<FeedbackPage/>} />
             <Route path="/login" element={<LoginPage/>} />
+            <Route path="/YeuCauIn" element={<PrintRequestPage/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

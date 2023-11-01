@@ -16,10 +16,15 @@ import HomeIcon from '@mui/icons-material/Home';
 import HistoryIcon from '@mui/icons-material/History';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import RateReviewIcon from '@mui/icons-material/RateReview';
-import { 
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+import { IconButton, Stack, createTheme } from '@mui/material';
+
+import {
   NavLink,
   Outlet,
- } from 'react-router-dom'
+} from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -48,10 +53,32 @@ export default function PermanentDrawerLeft() {
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+        <Toolbar sx={{ backgroundColor: 'white', color: 'primary' }}>
+          {/* <Typography variant="h6" noWrap component="div">
             The User card go here
-          </Typography>
+          </Typography> */}
+          <IconButton aria-label="notification-button" sx={{ color: '#0F6CBF' }} >
+            <NotificationsIcon></NotificationsIcon>
+          </IconButton>
+
+
+
+          <Stack spacing={1} direction='row' sx={{ marginLeft: 'auto', alignItems: 'center' }}>
+
+            <IconButton aria-label='avatar-icon' sx={{ color: '#0F6CBF' }} size='large' >
+              <AccountCircleIcon></AccountCircleIcon>
+            </IconButton>
+            <Stack direction='column' >
+              <Typography variant='h6' sx={{ color: 'text.primary' }} >Rick Astley </Typography>
+              <Typography variant='h7' sx={{ color: 'text.primary' }} >2152728</Typography>
+            </Stack>
+              <IconButton aria-label='dropdown-avatar'>
+              <ArrowDropDownCircleIcon/>  
+              </IconButton>
+
+          </Stack>
+
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -76,7 +103,7 @@ export default function PermanentDrawerLeft() {
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar sx={{color: 'primary'}}/>
+        <Toolbar sx={{ color: 'primary' }} />
         <Outlet />
       </Box>
     </Box>
