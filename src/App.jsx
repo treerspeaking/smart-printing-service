@@ -15,15 +15,15 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path='/*' element={<NotFound/>}></Route>
-          <Route path="/" element={<Root/>}>
+          <Route path="/smart-printing-service/login" element={<LoginPage/>} />
+          <Route path='/smart-printing-service/*' element={<NotFound/>}></Route>
+          <Route path="/smart-printing-service" element={<Root/>}>
             <Route path="/" element={<HomePage/>} />
-            <Route path="/LichSu" element={<HistoryPage/>} />
-            <Route path="/ThanhToan" element={<PaymentPage/>} />
-            <Route path="/PhanHoi" element={<FeedbackPage/>} />
+            <Route path="/smart-printing-service/LichSu" element={<HistoryPage/>} />
+            <Route path="/smart-printing-service/ThanhToan" element={<PaymentPage/>} />
+            <Route path="/smart-printing-service/PhanHoi" element={<FeedbackPage/>} />
             
-            <Route path="/YeuCauIn" element={<PrintRequestPage/>}></Route>
+            <Route path="/smart-printing-service/YeuCauIn" element={<PrintRequestPage/>}></Route>
             
           </Route>
         </Routes>
