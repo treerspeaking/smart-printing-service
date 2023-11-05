@@ -14,8 +14,8 @@ export const PaperBar4 = () => {
         </Stack>
 
 
-        <Stack direction={'row'}>
-          <SelectQuantity ></SelectQuantity>
+        <Stack direction={'row'} spacing={2} sx={{alignItems:'center'}}>
+          <SelectQuantity></SelectQuantity>
           <Link to=''>
             <Button variant='contained' sx={{ backgroundColor: '#0F6CBF', color: 'white', borderRadius: '100px', marginRight: '47px', alignContent: 'center' }}>
               Mua ngay

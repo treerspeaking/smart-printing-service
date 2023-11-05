@@ -24,7 +24,7 @@ const SelectQuantity = () => {
     };
     return (
         <div>
-            <Stack direction={'row'} sx={{}}>
+            <Stack direction={'row'} >
                 <Input
                     value={quantity}
                     onChange={handleInputChange}
