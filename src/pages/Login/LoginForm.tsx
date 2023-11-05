@@ -36,7 +36,7 @@ export const LoginForm = () => {
         <Stack sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <LoginButton></LoginButton>
         </Stack>
-        <Link href='/*' underline='hover' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <Link href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' underline='hover' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
             <Typography variant='h6'>Quên Mật Khẩu?</Typography>
         {/* <Button  variant='text'sx={{width:161, height:57,fontWeight:'underline'}}>Quên Mật Khẩu?</Button> */}
         </Link>
