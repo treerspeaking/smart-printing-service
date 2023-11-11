@@ -26,9 +26,9 @@ function App() {
           <Route path={pathRoot} element={<Root/>}>
             <Route path={pathHomePage} element={<HomePage/>} />
             <Route path={pathHistoryPage} element={<HistoryPage/>} />
-            <Route path={pathFeedbackPage} element={<PaymentPage/>} />
-            <Route path={pathLoginPage} element={<FeedbackPage/>} />
-            <Route path={pathPaymentPage} element={<LoginPage/>} />
+            <Route path={pathPaymentPage} element={<PaymentPage/>} />
+            <Route path={pathFeedbackPage} element={<FeedbackPage/>} />
+            <Route path={pathLoginPage} element={<LoginPage/>} />
             <Route path={pathPrintRequestPage} element={<PrintRequestPage/>}></Route>
           </Route>
         </Routes>
