@@ -7,6 +7,7 @@ import LoginPage from './pages/Login'
 import PaymentPage from './pages/Payment'
 import PrintRequestPage from './pages/PrintRequest'
 import Root from './components/root'
+import { NotFound } from './components/404NotFound'
 
 function App() {
   const pathRoot = "/"
@@ -23,15 +24,19 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path={pathRoot} element={<Root/>}>
-            <Route path={pathHomePage} element={<HomePage/>} />
-            <Route path={pathHistoryPage} element={<HistoryPage/>} />
-            <Route path={pathPaymentPage} element={<PaymentPage/>} />
-            <Route path={pathFeedbackPage} element={<FeedbackPage/>} />
-            <Route path={pathLoginPage} element={<LoginPage/>} />
-            <Route path={pathPrintRequestPage} element={<PrintRequestPage/>}></Route>
+          <Route path="/smart-printing-service/login" element={<LoginPage/>} />
+          <Route path='/smart-printing-service/*' element={<NotFound/>}></Route>
+          <Route path="/smart-printing-service" element={<Root/>}>
+            <Route path="/smart-printing-service" element={<HomePage/>} />
+            <Route path="/smart-printing-service/LichSu" element={<HistoryPage/>} />
+            <Route path="/smart-printing-service/ThanhToan" element={<PaymentPage/>} />
+            <Route path="/smart-printing-service/PhanHoi" element={<FeedbackPage/>} />
+            
+            <Route path="/smart-printing-service/YeuCauIn" element={<PrintRequestPage/>}></Route>
+            
           </Route>
         </Routes>
+        
       </BrowserRouter>
     </>
   )
