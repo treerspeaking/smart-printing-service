@@ -12,9 +12,6 @@ import { NotFound } from './components/404NotFound'
 function App() {
 
   const routes = [
-    { path: "/smart-printing-service/login", element: <LoginPage/> },
-    { path: "/smart-printing-service/*", element: <NotFound/> },
-    { path: "/smart-printing-service", element: <Root/> },
     { path: "/smart-printing-service", element: <HomePage/> },
     { path: "/smart-printing-service/LichSu", element: <HistoryPage/> },
     { path: "/smart-printing-service/ThanhToan", element: <PaymentPage/> },
@@ -28,9 +25,14 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {routes.map((route, index) => (
-            <Route key={index} path={route.path} element={route.element} />
-          ))}
+          
+        <Route path="/smart-printing-service/login" element={<LoginPage/>} /> 
+          <Route path='/smart-printing-service/*' element={<NotFound/>}></Route>
+          <Route path="/smart-printing-service" element={<Root/>}>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+          </Route>
         </Routes>
         
       </BrowserRouter>
