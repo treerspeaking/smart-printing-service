@@ -9,6 +9,7 @@ import PrintRequestPage from './pages/PrintRequest'
 import Root from './components/root'
 
 function App() {
+  const pathRoot = "/"
   const pathHomePage = "/"
   const pathHistoryPage = "/LichSu"
   const pathFeedbackPage = "/PhanHoi"
@@ -22,7 +23,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Root/>}>
+          <Route path={pathRoot} element={<Root/>}>
             <Route path={pathHomePage} element={<HomePage/>} />
             <Route path={pathHistoryPage} element={<HistoryPage/>} />
             <Route path={pathFeedbackPage} element={<PaymentPage/>} />
