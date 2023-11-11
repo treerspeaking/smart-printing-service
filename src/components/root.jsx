@@ -96,10 +96,10 @@ export default function PermanentDrawerLeft() {
         <Toolbar />
         <Divider />
         <List>
-          <ListItemLink text="Trang Chủ" icon={<HomeIcon />} to="/" />
-          <ListItemLink text="Lịch Sử" icon={<HistoryIcon />} to="/LichSu" />
-          <ListItemLink text="Thanh Toán" icon={<LocalMallIcon />} to="/ThanhToan" />
-          <ListItemLink text="Phản Hồi" icon={<RateReviewIcon />} to="/PhanHoi" />
+          <ListItemLink text="Trang Chủ" icon={<HomeIcon />} to="/smart-printing-service" />
+          <ListItemLink text="Lịch Sử" icon={<HistoryIcon />} to="/smart-printing-service/LichSu" />
+          <ListItemLink text="Thanh Toán" icon={<LocalMallIcon />} to="/smart-printing-service/ThanhToan" />
+          <ListItemLink text="Phản Hồi" icon={<RateReviewIcon />} to="/smart-printing-service/PhanHoi" />
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
