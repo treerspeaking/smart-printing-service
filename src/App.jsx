@@ -9,18 +9,26 @@ import PrintRequestPage from './pages/PrintRequest'
 import Root from './components/root'
 
 function App() {
+  const pathHomePage = "/"
+  const pathHistoryPage = "/LichSu"
+  const pathFeedbackPage = "/PhanHoi"
+  const pathLoginPage = "/login"
+  const pathPaymentPage = "/ThanhToan"
+  const pathPrintRequestPage = "/YeuCauIn"
+
+
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Root/>}>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="/LichSu" element={<HistoryPage/>} />
-            <Route path="/ThanhToan" element={<PaymentPage/>} />
-            <Route path="/PhanHoi" element={<FeedbackPage/>} />
-            <Route path="/login" element={<LoginPage/>} />
-            <Route path="/YeuCauIn" element={<PrintRequestPage/>}></Route>
+            <Route path={pathHomePage} element={<HomePage/>} />
+            <Route path={pathHistoryPage} element={<HistoryPage/>} />
+            <Route path={pathFeedbackPage} element={<PaymentPage/>} />
+            <Route path={pathLoginPage} element={<FeedbackPage/>} />
+            <Route path={pathPaymentPage} element={<LoginPage/>} />
+            <Route path={pathPrintRequestPage} element={<PrintRequestPage/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
