@@ -25,8 +25,8 @@ export default function HomePage() {
       </Stack>
       <Stack direction={'column'} spacing={'60px'} sx={{ marginTop: '34px' }}>
         <PaperBar1 />
-        <PaperBar2 />
-        <PaperBar3 />
+        <PaperBar2 bgColor='white' buttonColor='#1976d2' content='Mua 10 tờ' buttonTextColor='white' />
+        <PaperBar2 bgColor='#91BDEE' buttonColor='white' content='Mua 20 tờ' buttonTextColor='black' buttonHoverColor='white'/>
         <PaperBar4 />
       </Stack>
     </Stack>
