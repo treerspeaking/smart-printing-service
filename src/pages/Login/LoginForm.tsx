@@ -17,6 +17,10 @@ import { LoginButton } from "./LoginButton";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useAuth, AuthProvider } from "../../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../contexts/RouteContext';
+
+
+
 export const LoginForm = () => {
 
   var [showPassword, setShowPassword] = useState(false);
@@ -53,7 +57,8 @@ export const LoginForm = () => {
 
       await login(username, password);
 
-      navigate('/home'); // Navigate to home page
+      navigate(ROUTES.HOME); // Navigate to home page
+
       
       console.log("Login success");
     } 
