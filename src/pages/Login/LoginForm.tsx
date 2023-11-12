@@ -11,26 +11,75 @@ import {
   InputAdornment,
   IconButton,
   FilledInput,
+  Box
 } from "@mui/material";
 import { LoginButton } from "./LoginButton";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
+import { useAuth, AuthProvider } from "../../contexts/AuthContext";
+import { useNavigate } from 'react-router-dom';
 export const LoginForm = () => {
+
   var [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   var [username, setUsername] = useState("");
   var [password, setPassword] = useState("");
+  var [error, setError] = useState("");
+  var [loading, setLoading] = useState(false);
+  var {login} = useAuth();
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     console.log({
       username: username,
       password: password,
     });
+
+    e.preventDefault();
+
+    if (username === "" || password === "") {
+      setError("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
+
+    const hcmutEmailPattern = /@hcmut\.edu\.vn$/;
+    if (!hcmutEmailPattern.test(username)) {
+      setError("Phải đăng nhập bằng mail có đuôi @hcmut.edu.vn");
+      return;
+    }
+
+    try {
+      setError("");
+      setLoading(true);
+
+      await login(username, password);
+
+      navigate('/home'); // Navigate to home page
+      
+      console.log("Login success");
+    } 
+    catch (error) {
+      console.log(error.code);
+      if (error.code == "auth/too-many-requests")
+      {
+        setError("Đang có quá nhiều yêu cầu đăng nhập, vui lòng đợi một lúc");
+      } 
+      else if (error.code == "auth/invalid-login-credentials" || error.code == "auth/user-not-found" || error.code == "auth/wrong-password") 
+      {
+        setError("Sai tên người dùng hoặc mật khẩu");
+      } 
+      else 
+      {
+        setError("Đã xảy ra lỗi, vui lòng thử lại sau");
+      }
+    }
+
+    setLoading(false);
+
   }
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <Paper
@@ -48,6 +97,17 @@ export const LoginForm = () => {
         display="flex"
         alignItems="center"
       >
+        {error !== "" && 
+          <Box 
+            bgcolor="#f4d3d9" 
+              color="#673042" 
+              p={2} 
+              my={2} 
+              sx={{ height: "71px", width: "500px" }}>
+            <Typography variant="h6">{error}</Typography>
+          </Box>
+        }
+
         <Stack direction={"column"} spacing={2}>
           <Typography variant="h6">Tên người dùng</Typography>
           <TextField
@@ -95,7 +155,7 @@ export const LoginForm = () => {
             height: "100%",
           }}
         >
-          <LoginButton submitHandler={e => handleSubmit(e)}></LoginButton>
+          <LoginButton submitHandler={e => handleSubmit(e)} disable = {loading}></LoginButton>
         </Stack>
         <Link
           href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"

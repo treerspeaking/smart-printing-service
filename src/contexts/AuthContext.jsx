@@ -22,6 +22,8 @@ export function AuthProvider({ children }) {
 			const user = userCredential.user;
 		} catch (error) {
 			console.log(error);
+
+			throw error;
 		}
 	};
 
@@ -31,6 +33,8 @@ export function AuthProvider({ children }) {
 			const user = userCredential.user;
 		} catch (error) {
 			console.log(error);
+			
+			throw error;
 		}
 	};
 
@@ -39,6 +43,8 @@ export function AuthProvider({ children }) {
 			await signOut(auth);
 		} catch (error) {
 			console.log(error);
+			
+			throw error;
 		}
 	};
 
@@ -49,6 +55,7 @@ export function AuthProvider({ children }) {
 		}
 		catch (error) {
 			console.log(error);
+			throw error;
 		}
 	};
 
