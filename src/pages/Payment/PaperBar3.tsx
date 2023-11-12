@@ -15,7 +15,7 @@ export const PaperBar3 = () => {
           <Button variant='contained' sx={{backgroundColor:'white',color:'black',borderRadius:'100px',marginRight:'47px','&:hover': {
               backgroundColor: 'white', // Set the hover background color to the same as the normal state
               color: 'black', // Set the hover text color to the same as the normal state
-            },}}>
+            }}}>
             Mua ngay
           </Button>
         </Link>
