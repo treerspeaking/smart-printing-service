@@ -13,10 +13,10 @@ export const ROUTES = {
   NOT_FOUND: "/smart-printing-service/*",
   ROOT: "/smart-printing-service",
   HOME: "/smart-printing-service/Home",
-  HISTORY: "/smart-printing-service/LichSu",
-  PAYMENT: "/smart-printing-service/ThanhToan",
-  FEEDBACK: "/smart-printing-service/PhanHoi",
-  PRINT_REQUEST: "/smart-printing-service/YeuCauIn",
+  HISTORY: "/smart-printing-service/HistoryLog",
+  PAYMENT: "/smart-printing-service/Payment",
+  FEEDBACK: "/smart-printing-service/Feedback",
+  PRINT_REQUEST: "/smart-printing-service/PrintRequest",
   // Add more routes here...
 };
 
