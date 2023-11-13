@@ -20,6 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import { IconButton, Stack, createTheme } from '@mui/material';
+import {ROUTES} from '../contexts/RouteContext'
 
 import {
   NavLink,
@@ -96,10 +97,10 @@ export default function PermanentDrawerLeft() {
         <Toolbar />
         <Divider />
         <List>
-          <ListItemLink text="Trang Chủ" icon={<HomeIcon />} to="/smart-printing-service" />
-          <ListItemLink text="Lịch Sử" icon={<HistoryIcon />} to="/smart-printing-service/LichSu" />
-          <ListItemLink text="Thanh Toán" icon={<LocalMallIcon />} to="/smart-printing-service/ThanhToan" />
-          <ListItemLink text="Phản Hồi" icon={<RateReviewIcon />} to="/smart-printing-service/PhanHoi" />
+          <ListItemLink text="Trang Chủ" icon={<HomeIcon />} to = {ROUTES.HOME}/>
+          <ListItemLink text="Lịch Sử" icon={<HistoryIcon />} to= {ROUTES.HISTORY}/>
+          <ListItemLink text="Thanh Toán" icon={<LocalMallIcon />} to={ROUTES.PAYMENT}/>
+          <ListItemLink text="Phản Hồi" icon={<RateReviewIcon />} to={ROUTES.FEEDBACK}/>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
