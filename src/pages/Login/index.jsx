@@ -5,10 +5,7 @@ import { AuthProvider } from "../../contexts/AuthContext";
 
 export default function LoginPage() {
   return (
-
-    <AuthProvider>
-      <LoginPageContent />
-    </AuthProvider>
+    <LoginPageContent />
   );
 }
 

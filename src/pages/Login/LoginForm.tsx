@@ -89,9 +89,9 @@ export const LoginForm = () => {
   return (
     <Paper
       elevation={4}
-      sx={{ width: "600px", height: "600px", flexGrow: 1, borderRadius: 12 }}
+      sx={{ minWidth: "480px", width:'600px', height: "600px", flexGrow: 1, borderRadius: 12 }}
     >
-      <Typography variant="h5" sx={{ textAlign: "center", marginTop: "81px" }}>
+      <Typography variant="h4" sx={{ textAlign: "center", marginTop: "80px",mb: 3 }}>
         ĐĂNG NHẬP
       </Typography>
 
@@ -108,27 +108,24 @@ export const LoginForm = () => {
               color="#673042" 
               p={2} 
               my={2} 
-              sx={{ height: "71px", width: "500px" }}>
+              sx={{ height: "71px", width: "90%" }}>
             <Typography variant="h6">{error}</Typography>
           </Box>
         }
 
-        <Stack direction={"column"} spacing={2}>
+        <Stack direction={"column"} spacing={2} sx={{width: '90%'}}>
           <Typography variant="h6">Tên người dùng</Typography>
           <TextField
             required
             id="filled-required"
             label="Bắt buộc"
             variant="filled"
-            sx={{ height: "71px", width: "500px" }}
+            sx={{ height: "71px", width: "100%" }}
             placeholder="Nhập tên người dùng"
             onChange={(e) => {setUsername(e.target.value)}}
           />
-        </Stack>
-
-        <Stack direction={"column"} spacing={2}>
           <Typography variant="h6">Mật khẩu</Typography>
-          <FormControl sx={{ height:"71px", width: "500px" }} variant="filled">
+          <FormControl sx={{ height:"71px", width: "100%" }} variant="filled">
             <InputLabel htmlFor="filled-adornment-password">
               Mật khẩu
             </InputLabel>
@@ -144,6 +141,7 @@ export const LoginForm = () => {
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     edge="end"
+                    color="primary"
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -151,6 +149,9 @@ export const LoginForm = () => {
               }
             />
           </FormControl>
+        </Stack>
+
+        <Stack direction={"column"} spacing={2}>
         </Stack>
         <Stack
           sx={{
