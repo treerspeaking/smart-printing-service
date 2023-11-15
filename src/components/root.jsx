@@ -19,20 +19,24 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
-import { IconButton, Stack, createTheme } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Container, IconButton, Stack, createTheme } from '@mui/material';
 import {ROUTES} from '../contexts/RouteContext'
 
 import {
+  Form,
   NavLink,
   Outlet,
 } from 'react-router-dom'
 
 const drawerWidth = 240;
 
-function ListItemLink({ text, icon, to }) {
+function ListItemLink({ text, icon, to, ...other }) {
+
+
   return (
     <>
-      <NavLink to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <NavLink to={to} {...other} style={{ textDecoration: 'none', color: 'inherit' }}>
         <ListItem key={text} disablePadding>
           <ListItemButton>
             <ListItemIcon>
@@ -42,6 +46,27 @@ function ListItemLink({ text, icon, to }) {
           </ListItemButton>
         </ListItem>
       </NavLink>
+    </>
+  )
+}
+
+function ListItemLogOut({ text, icon, to, ...other }) {
+  
+
+  return (
+    <>
+      {/* <NavLink to={to} {...other} style={{ textDecoration: 'none', color: 'inherit' }}> */}
+      {/* <Form method="POST" action={ROUTES.LOGOUT}> */}
+        <ListItem key={text} disablePadding>
+          <ListItemButton type='submit'>
+            <ListItemIcon>
+              {icon}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItemButton>
+        </ListItem>
+      {/* </Form> */}
+      {/* </NavLink> */}
     </>
   )
 }
@@ -101,11 +126,17 @@ export default function PermanentDrawerLeft() {
           <ListItemLink text="Lịch Sử" icon={<HistoryIcon />} to= {ROUTES.HISTORY}/>
           <ListItemLink text="Thanh Toán" icon={<LocalMallIcon />} to={ROUTES.PAYMENT}/>
           <ListItemLink text="Phản Hồi" icon={<RateReviewIcon />} to={ROUTES.FEEDBACK}/>
+          {/* <ListItemLogOut text="Đăng Xuất" icon={<LogoutIcon />} to={ROUTES.LOGOUT}/> */}
         </List>
+            <Form method="POST" action="Logout">
+      <button type="submit">Logout</button>
+    </Form>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar sx={{ color: 'primary' }} />
-        <Outlet />
+      <Box component="main" sx={{ flexGrow: 1, p: 4 }}>
+        {/* <Box sx={{display:'flex', width: '100%', flexDirection:'column'}}> */}
+          <Toolbar sx={{ color: 'primary' }} />
+          <Outlet />
+        {/* </Box> */}
       </Box>
     </Box>
   );

@@ -17,6 +17,7 @@ export const ROUTES = {
   PAYMENT: "/smart-printing-service/Payment",
   FEEDBACK: "/smart-printing-service/Feedback",
   PRINT_REQUEST: "/smart-printing-service/PrintRequest",
+  LOGOUT: "/smart-printing-service/LogOut",
   // Add more routes here...
 };
 
