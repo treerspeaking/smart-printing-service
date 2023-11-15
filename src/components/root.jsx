@@ -20,7 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Container, IconButton, Stack, createTheme } from '@mui/material';
+import { Button, Container, IconButton, Stack, createTheme } from '@mui/material';
 import {ROUTES} from '../contexts/RouteContext'
 
 import {
@@ -56,16 +56,27 @@ function ListItemLogOut({ text, icon, to, ...other }) {
   return (
     <>
       {/* <NavLink to={to} {...other} style={{ textDecoration: 'none', color: 'inherit' }}> */}
-      {/* <Form method="POST" action={ROUTES.LOGOUT}> */}
+      <Form method="POST" action={ROUTES.LOGOUT} >
+        <button type="submit" style={{ 
+          background: 'none',
+          color: 'inherit',
+          border: 'none',
+          padding: '0',
+          font: 'inherit',
+          cursor: 'pointer',
+          outline: 'inherit',
+          width: '100%',
+        }}>
         <ListItem key={text} disablePadding>
-          <ListItemButton type='submit'>
+          <ListItemButton>
             <ListItemIcon>
               {icon}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItemButton>
         </ListItem>
-      {/* </Form> */}
+        </button>
+      </Form>
       {/* </NavLink> */}
     </>
   )
@@ -121,16 +132,13 @@ export default function PermanentDrawerLeft() {
       >
         <Toolbar />
         <Divider />
-        <List>
+        <List sx={{display:'flex', flexDirection: 'column',flexGrow: '1'}}>
           <ListItemLink text="Trang Chủ" icon={<HomeIcon />} to = {ROUTES.HOME}/>
           <ListItemLink text="Lịch Sử" icon={<HistoryIcon />} to= {ROUTES.HISTORY}/>
           <ListItemLink text="Thanh Toán" icon={<LocalMallIcon />} to={ROUTES.PAYMENT}/>
           <ListItemLink text="Phản Hồi" icon={<RateReviewIcon />} to={ROUTES.FEEDBACK}/>
-          {/* <ListItemLogOut text="Đăng Xuất" icon={<LogoutIcon />} to={ROUTES.LOGOUT}/> */}
         </List>
-            <Form method="POST" action="Logout">
-      <button type="submit">Logout</button>
-    </Form>
+          <ListItemLogOut text="Đăng Xuất" icon={<LogoutIcon />} to={ROUTES.LOGOUT}/>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 4 }}>
         {/* <Box sx={{display:'flex', width: '100%', flexDirection:'column'}}> */}

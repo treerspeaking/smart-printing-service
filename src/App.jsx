@@ -25,11 +25,11 @@ const router = createBrowserRouter(
             <Route key={index} path={route.path} element={<LoginRoute children={route.element}/> } />
           ))}
           <Route path={RootRoute.path} element={RootRoute.element}>
-            <Route index element={<Navigate to={ROUTES["HOME"]} replace />} />
+            <Route index element={<Navigate to={ROUTES.HOME} replace />} />
             {RootRoute.children.map((route, index) => (
               <Route key={index} path={route.path} element={<PrivateRoute children={route.element}/>} />
             ))}
-            <Route path='/smart-printing-service/LogOut' action={logoutaction} element={<>hello</>}/>
+            <Route path={ROUTES.LOGOUT} action={logoutaction} element={<>hello</>}/>
           </Route>
         </Route>
   )
