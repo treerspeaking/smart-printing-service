@@ -3,7 +3,7 @@ import { Paper, Stack, Typography } from '@mui/material';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import { PaperBar1 } from './PaperBar1';
 import { PaperBar2 } from './PaperBar2';
-import { PaperBar3 } from './PaperBar3';
+
 import { PaperBar4 } from './PaperBar4';
 
 export default function HomePage() {
@@ -24,9 +24,9 @@ export default function HomePage() {
 
       </Stack>
       <Stack direction={'column'} spacing={'60px'} sx={{ marginTop: '34px' }}>
-        <PaperBar1 />
-        <PaperBar2 bgColor='white' buttonColor='#1976d2' content='Mua 10 tờ' buttonTextColor='white' />
-        <PaperBar2 bgColor='#91BDEE' buttonColor='white' content='Mua 20 tờ' buttonTextColor='black' buttonHoverColor='white'/>
+        <PaperBar1 paperQuantity={5} payAmount={50000}/>
+        <PaperBar2 bgColor='white' buttonColor='#1976d2' content='Mua 10 tờ' buttonTextColor='white' paperQuantity={10} payAmount={10000*10}/>
+        <PaperBar2 bgColor='#91BDEE' buttonColor='white' content='Mua 20 tờ' buttonTextColor='black' buttonHoverColor='white'paperQuantity={10} payAmount={10000*20}/>
         <PaperBar4 />
       </Stack>
     </Stack>

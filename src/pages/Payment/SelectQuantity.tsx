@@ -4,30 +4,22 @@ import IconButton from '@mui/material/IconButton';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Stack } from '@mui/material';
-const SelectQuantity = () => {
-    const [quantity, setQuantity] = useState(0);
+interface Props
+{
 
-    const handleIncrement = () => {
-        setQuantity(quantity + 1);
-    };
+    quantity:number
+    onIncrement: ()=>void
+    onDecrement: () => void
+    onInputChange: (e) =>void
+}
+const SelectQuantity = ({quantity,onIncrement,onDecrement,onInputChange}:Props) => {
 
-    const handleDecrement = () => {
-        if (quantity > 0) {
-            setQuantity(quantity - 1);
-        }
-    };
-    const handleInputChange = (e) => {
-        const newValue = parseInt(e.target.value, 10);
-        if (!isNaN(newValue)) {
-            setQuantity(newValue);
-        }
-    };
     return (
         <div>
             <Stack direction={'row'} >
                 <Input
                     value={quantity}
-                    onChange={handleInputChange}
+                    onChange={onInputChange}
                     inputProps={{
                         style: {
                             textAlign: 'center',
@@ -38,14 +30,14 @@ const SelectQuantity = () => {
                 <Stack direction={'column'}>
                     <IconButton
                         aria-label="Increment"
-                        onClick={handleIncrement}
+                        onClick={onIncrement}
                     >
                         <ArrowDropUpIcon />
                     </IconButton>
 
                     <IconButton
                         aria-label="Decrement"
-                        onClick={handleDecrement}
+                        onClick={onDecrement}
                     >
                         <ArrowDropDownIcon />
                     </IconButton>
