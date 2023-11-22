@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Box, Stack, Typography, TextField } from '@mui/material';
 import { SubmitButton } from './SubmitButton';
 
@@ -18,4 +18,4 @@ export const ContentField = () => {
             </Stack>
         </Box>
     );
-  }
+}

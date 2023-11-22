@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export const PrintRequest = () => {
   return (
     
-    <Link to={'YeuCauIn'}>
+    <Link to={'/smart-printing-service/PrintRequest'}>
       <Button variant='contained' sx={{width:161, height:57, borderRadius:100}} >Đặt in mới</Button>
     </Link>
   )

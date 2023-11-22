@@ -1,5 +1,5 @@
 import { Modal, Box, Typography, Button, Stack } from '@mui/material';
-import React from 'react';
+import * as React from 'react';
 import { ContentField } from './ContentField';
 
 export const FeedbackContent = () => {
@@ -10,4 +10,4 @@ export const FeedbackContent = () => {
             <ContentField />
         </Stack>
     );
-  }
+}
