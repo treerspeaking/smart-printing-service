@@ -1,29 +1,66 @@
+import React from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import HomePage from './pages/Home'
-import HistoryPage from './pages/History'
-import FeedbackPage from './pages/Feedback'
-import LoginPage from './pages/Login'
-import PaymentPage from './pages/Payment'
-import PrintRequestPage from './pages/PrintRequest'
-import Root from './component/root'
+import { AuthProvider } from './contexts/AuthContext'
+import { Navigate } from 'react-router-dom'
+
+import { ErrorRoute, AuthenticationRoutes, RootRoute, ROUTES } from './contexts/RouteContext'
+import PrivateRoute from './route/PrivateRoute'
+import LoginRoute from './route/LoginRoute'
+import {action as logoutaction} from './route/LogOut'
+
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+
+// I need to create this so the form can work
+const router = createBrowserRouter(
+  createRoutesFromElements(
+        <Route>
+          {ErrorRoute.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+          {AuthenticationRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={<LoginRoute children={route.element}/> } />
+          ))}
+          <Route path={RootRoute.path} element={RootRoute.element}>
+            <Route index element={<Navigate to={ROUTES.HOME} replace />} />
+            {RootRoute.children.map((route, index) => (
+              <Route key={index} path={route.path} element={<PrivateRoute children={route.element}/>} />
+            ))}
+            <Route path={ROUTES.LOGOUT} action={logoutaction} element={<>hello</>}/>
+          </Route>
+        </Route>
+  )
+);
 
 function App() {
-
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Root/>}>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="/LichSu" element={<HistoryPage/>} />
-            <Route path="/ThanhToan" element={<PaymentPage/>} />
-            <Route path="/PhanHoi" element={<FeedbackPage/>} />
-            <Route path="/login" element={<LoginPage/>} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+    // <BrowserRouter>
+    //   <AuthProvider>
+    //     <Routes>
+    //       {ErrorRoute.map((route, index) => (
+    //         <Route key={index} path={route.path} element={route.element} />
+    //       ))}
+    //       {AuthenticationRoutes.map((route, index) => (
+    //         <Route key={index} path={route.path} element={<LoginRoute children={route.element}/> } />
+    //       ))}
+    //       <Route path={RootRoute.path} element={RootRoute.element}>
+    //         <Route index element={<Navigate to={ROUTES["HOME"]} replace />} />
+    //         {RootRoute.children.map((route, index) => (
+    //           <Route key={index} path={route.path} element={<PrivateRoute children={route.element}/>} />
+    //         ))}
+    //         <Route path='/smart-printing-service/LogOut' ac={logoutaction} element={<>hello</>}/>
+    //       </Route>
+    //     </Routes>
+    //   </AuthProvider>
+    // </BrowserRouter>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   )
 }
 
-export default App
+
+export default App;

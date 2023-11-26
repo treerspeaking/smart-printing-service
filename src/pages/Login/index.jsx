@@ -1,10 +1,11 @@
 import React from 'react';
+import { LoginPageContent } from './LoginPageContent';
 
-export default function HomePage() {
+import { AuthProvider } from "../../contexts/AuthContext";
+
+export default function LoginPage() {
   return (
-    <div>
-      <h1>Đăng nhập</h1>
-    </div>
+    <LoginPageContent />
   );
 }
 

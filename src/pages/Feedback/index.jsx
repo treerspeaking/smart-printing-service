@@ -1,10 +1,12 @@
 import React from 'react';
+import { AuthProvider } from "../../contexts/AuthContext";
+import { FeedbackContent } from './FeedbackContent';
 
 export default function HomePage() {
   return (
-    <div>
-      <h1>Phản Hồi</h1>
-    </div>
+    <AuthProvider>
+      <FeedbackContent />
+    </AuthProvider>
   );
 }
 

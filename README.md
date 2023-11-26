@@ -1,2 +1,7 @@
 # smart-printing-service
-This is a project for Software Engineering Course, Semester 231.
+
+Login using Firebase
+Email:
+    admin@hcmut.edu.vn
+Password:
+    123456
