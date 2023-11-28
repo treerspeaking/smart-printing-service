@@ -30,8 +30,10 @@ export default function HomePage() {
             setPagesError(true);
         }
     };
+    const availablePrinters = ["304 B4", "402 A4", "603 H6"];
     // state for in 2 mặt or in 1 mặt
-    const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
+    const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0)
+    const [printer, setPrinter] = useState('B4 304');
     const [pageSize, setPageSize] = useState('A4');
     const [printingPages, setPrintingPages] = useState('');
     const [pagesError, setPagesError] = useState(false);
@@ -67,7 +69,11 @@ export default function HomePage() {
                 <Typography variant={'h4'} fontWeight={600}>
                     Chọn máy in
                 </Typography>
-                <FindPrinters></FindPrinters>
+                <FindPrinters
+                    defaultValue={printer}
+                    printers={availablePrinters}
+                    onChange={(e) => setPrinter(e.target.value)}
+                />
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DateTimePicker']}>
