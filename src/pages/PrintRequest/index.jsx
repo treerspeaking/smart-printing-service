@@ -12,6 +12,11 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {Link} from 'react-router-dom';
 
+import { DateTimePicker, LocalizationProvider, viVN } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo/DemoContainer.js';
+import dayjs from 'dayjs';
+
 export default function HomePage() {
     const handleInput = (event) => {
         // Custom validation to allow only numbers and commas
@@ -19,8 +24,11 @@ export default function HomePage() {
         // You can use inputValue for further processing or state update
     };
     // state for in 2 mặt or in 1 mặt
+    const defaultReceiveDateTime = dayjs().add(1, 'day').hour(8).minute(0).second(0).millisecond(0);
     const [singleSidePrinting, setSingleSidePrinting] = useState(false);
     const [doubleSidePrinting, setDoubleSidePrinting] = useState(false);
+    const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime);
+    const [file, setFile] = useState(null);
 
     const handleSingleSidePrintingChange = () => {
         setSingleSidePrinting(true);
@@ -41,27 +49,36 @@ export default function HomePage() {
 
     return (
         <Stack direction={'column'} sx={{marginLeft: '60px'}}>
-            <Typography variant={'h3'}>
+            <Typography variant={'h3'} fontWeight={700}>
                 YÊU CẦU IN
             </Typography>
-            <Stack direction={'column'} sx={{marginTop: '160px'}}>
+            <Stack direction={'column'} spacing={3} sx={{marginTop: '20px'}}>
 
-                <Typography variant={'h4'}>
+                <Typography variant={'h4'} fontWeight={600}>
                     Chọn máy in
                 </Typography>
                 <FindPrinters></FindPrinters>
 
-
-                <Stack direction={'row'} sx={{marginTop: '158px'}} spacing={'28px'}>
-                    <Button variant={'contained'} sx={{borderRadius: '20px'}}>CHỌN NGÀY NHẬN</Button>
-                    <Button variant={'contained'} sx={{borderRadius: '20px'}}>CHỌN THỜI GIAN NHẬN</Button>
-                </Stack>
-                <Typography variant={'h5'} sx={{marginTop: '65px'}}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DateTimePicker']}>
+                  <DateTimePicker
+                    label="Chọn thời gian nhận"
+                    value={receiveDateTime}
+                    onChange={(newValue) => setReceiveDateTime(newValue)}
+                    ampm={false}
+                    defaultValue={defaultReceiveDateTime}
+                    disablePast
+                    sx={{ width: 100 }}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+                <Typography variant={'h4'} fontWeight={600} sx={{marginTop: '65px'}}>
                     Tải tệp lên
                 </Typography>
                 <Button
                     variant='contained'
                     component="label"
+                    onClick={file ? () => setFile(null) : null}
                     sx={{
                         backgroundColor: 'white',
                         border: 'dashed',
@@ -69,20 +86,38 @@ export default function HomePage() {
                         color: 'black',
                         borderRadius: '20px',
                         '&:hover': {
-                            backgroundColor: 'white', // Change this to the desired hover color
+                            backgroundColor: '#EEEEEE', // Change this to the desired hover color
                         },
                         width: '903px',
-                        marginTop: '36px'
+                        height: '100px',
+                        marginTop: '36px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        textTransform: 'none',
                     }}
                 >
-                    <UploadFileIcon></UploadFileIcon>
-                    THÊM TỆP
-                    <input
-                        type="file"
-                        hidden
-                    />
+
+                    <UploadFileIcon sx={{ height: 50, width: 50 }}/>
+                    {!file
+                        ? 
+                        <div>
+                            <Typography >Nhấp vào đây để thêm tệp</Typography>
+                            <input
+                                type="file"
+                                hidden
+                                onChange={(e) => {
+                                    setFile(e.target.files[0])
+                                }}
+                            />
+                        </div>
+                        :
+                        <div sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
+                            <Typography color="blue" textAlign="center">{file.name}</Typography>
+                            <Typography textAlign="center">Nhấp vào đây để chọn tệp khác</Typography>
+                        </div>
+                    }
                 </Button>
-                <Typography variant={'h5'} sx={{marginTop: '90px', marginBottom: '31px'}}>Thiết lập in</Typography>
+                <Typography variant={'h4'} fontWeight={600} sx={{marginTop: '90px', marginBottom: '31px'}}>Thiết lập in</Typography>
                 <Stack direction={'row'} sx={{marginBottom:'24px'}}>
 
                     <Stack sx={{width: '170.75px'}}>
