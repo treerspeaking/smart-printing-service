@@ -103,14 +103,15 @@ export default function HomePage() {
                         marginTop: '36px',
                         display: 'flex',
                         flexDirection: 'column',
+                        alignItems: 'center',
                         textTransform: 'none',
                     }}
                 >
 
-                    <UploadFileIcon sx={{ height: 50, width: 50 }}/>
                     {!file
                         ? 
-                        <div>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "start" }}>
+                            <UploadFileIcon sx={{ height: 50, width: 50 }}/>
                             <Typography >Nhấp vào đây để thêm tệp</Typography>
                             {/* TODO: Get the accepted file types from the backend first before this */}
                             <input
