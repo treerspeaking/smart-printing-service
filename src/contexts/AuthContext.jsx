@@ -1,9 +1,9 @@
 
 
-import { auth , googleProvider } from "../firebase/Firebase"; // Import auth from your firebase config
+import { auth , googleProvider, db } from "../firebase/Firebase"; // Import auth from your firebase config
 import {createUserWithEmailAndPassword, signInWithPopup, signOut, signInWithEmailAndPassword} from "firebase/auth"
 import React, { useState, useContext, useEffect } from "react"; // Import useState from react
-
+import { doc, getDoc } from "firebase/firestore";
 
 const AuthContext = React.createContext();
 
@@ -15,6 +15,22 @@ export function AuthProvider({ children }) {
 
 	const [currentUser, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+
+	const [userData, setUserData] = useState(null); // State to store the user data from Firestore
+
+    // Function to fetch user data from Firestore
+    const fetchUserData = async (uid) => {
+        const docRef = doc(db, "Student", uid);
+        const docSnap = await getDoc(docRef);
+
+
+        if (docSnap.exists()) {
+            setUserData(docSnap.data());
+			console.log(docSnap.data());
+        } else {
+            console.log("No such document!", uid);
+        }
+    };
 
 	const signIn = async (email, password) => {
 		try {
@@ -63,12 +79,17 @@ export function AuthProvider({ children }) {
 		const unsubscriber = auth.onAuthStateChanged((user) => {
 			setLoading(false);
 			setUser(user);
+
+			if (user) {
+                fetchUserData(user.uid);
+            }
 		})
 		return unsubscriber;
 	}, []) 
 
 	const value = {
 		currentUser,
+		userData,
 		signIn,
 		signInWithGoogle,
 		logout,

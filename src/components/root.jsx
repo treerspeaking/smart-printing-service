@@ -21,7 +21,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Button, Container, IconButton, Stack, createTheme } from '@mui/material';
+
 import {ROUTES} from '../contexts/RouteContext'
+import {useAuth, AuthProvider} from '../contexts/AuthContext'
 
 import {
   Form,
@@ -82,6 +84,24 @@ function ListItemLogOut({ text, icon, to, ...other }) {
   )
 }
 
+function UserInfo(){
+  
+  const { userData } = useAuth();
+
+  return (
+    <>
+    
+      <Typography variant='h6' sx={{ color: 'text.primary' }}>
+          {userData ? userData.Name : 'Loading...'}
+      </Typography>
+      <Typography variant='h7' sx={{ color: 'text.primary' }}>
+        {userData ? userData.StudentID : 'Loading...'}
+      </Typography>
+    </>
+  )
+}
+
+
 export default function PermanentDrawerLeft() {
   return (
     <Box sx={{ display: 'flex' }}>
@@ -106,8 +126,9 @@ export default function PermanentDrawerLeft() {
               <AccountCircleIcon></AccountCircleIcon>
             </IconButton>
             <Stack direction='column' >
-              <Typography variant='h6' sx={{ color: 'text.primary' }} >Rick Astley </Typography>
-              <Typography variant='h7' sx={{ color: 'text.primary' }} >2152728</Typography>
+              <AuthProvider>
+                <UserInfo/>
+              </AuthProvider>
             </Stack>
               <IconButton aria-label='dropdown-avatar'>
               <ArrowDropDownCircleIcon/>  
