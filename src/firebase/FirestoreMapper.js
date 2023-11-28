@@ -22,6 +22,7 @@ class FirestoreMapper {
     await updateDoc(docRef, newData);
   }
 
+
   async createOrOverwriteDocument(id, newData) {
     const docRef = doc(db, this.collectionName, id);
     await setDoc(docRef, newData);

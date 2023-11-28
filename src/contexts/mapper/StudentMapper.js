@@ -5,6 +5,14 @@ class StudentMapper extends FirestoreMapper {
       super('Student');
     }
   
+    GetStudentData() {
+      return this.fetchData('Student');
+    }
+
+    CreatePrintingRequest(){
+      
+    }
+
     // You can add more methods specific to StudentMapper here
   }
   
