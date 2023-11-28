@@ -24,7 +24,7 @@ export default function HomePage() {
         // You can use inputValue for further processing or state update
     };
     // state for in 2 mặt or in 1 mặt
-    const defaultReceiveDateTime = dayjs().add(1, 'day').hour(8).minute(0).second(0).millisecond(0);
+    const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
     const [singleSidePrinting, setSingleSidePrinting] = useState(false);
     const [doubleSidePrinting, setDoubleSidePrinting] = useState(false);
     const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime);
@@ -102,9 +102,11 @@ export default function HomePage() {
                         ? 
                         <div>
                             <Typography >Nhấp vào đây để thêm tệp</Typography>
+                            {/* TODO: Get the accepted file types from the backend first before this */}
                             <input
                                 type="file"
                                 hidden
+                                accept=".pdf , .docx , .doc , .pptx , .ppt , .xlsx , .xls"
                                 onChange={(e) => {
                                     setFile(e.target.files[0])
                                 }}
