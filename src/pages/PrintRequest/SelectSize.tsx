@@ -17,10 +17,10 @@ const SelectSize = ( {onChange, defaultValue} ) => {
         <TextField
           id="select-paper-size"
           select
-          label="Select"
+          label="Cỡ"
           defaultValue={defaultValue}
           onChange={e => onChange(e)}
-          sx={{marginLeft:'100px'}}
+          sx={{ marginLeft:'100px', width: 75 }}
         >
           {sizes.map((option) => (
             <MenuItem key={option} value={option}>

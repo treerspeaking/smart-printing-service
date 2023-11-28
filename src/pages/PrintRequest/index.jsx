@@ -168,7 +168,7 @@ export default function HomePage() {
                                 error={pagesError}
                                 helperText={pagesError && "Only allow numbers seperated by commas"}
                                 onChange={handlePagesInput}
-                                placeholder="Enter pages (e.g., 1, 2, 3)"
+                                placeholder="Nhập các trang (e.g., 1, 2, 3)"
                             />
                             <FileCopyIcon
                                 sx={{ margin: 2 }}
