@@ -139,6 +139,7 @@ export default function HomePage() {
 
                     {/*    drop down list*/}
                     <SelectSize
+                        defaultValue={pageSize}
                         onChange={(e) => setPageSize(e.target.value)}
                     />
 
