@@ -89,7 +89,7 @@ export const LoginForm = () => {
   return (
     <Paper
       elevation={4}
-      sx={{ minWidth: "480px", width:'600px', height: "600px", flexGrow: 1, borderRadius: 12 }}
+      sx={{ minWidth: "480px", width:'600px', flexGrow: 1, borderRadius: 12, flexDirection: "column"}}
     >
       <Typography variant="h4" sx={{ textAlign: "center", marginTop: "80px",mb: 3 }}>
         ĐĂNG NHẬP
