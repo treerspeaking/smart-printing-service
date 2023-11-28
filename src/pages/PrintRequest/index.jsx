@@ -18,13 +18,23 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo/DemoContainer.
 import dayjs from 'dayjs';
 
 export default function HomePage() {
-    const handleInput = (event) => {
-        // Custom validation to allow only numbers and commas
-        const inputValue = event.target.value.replace(/[^0-9,]/g, '');
-        // You can use inputValue for further processing or state update
+    const handlePagesInput = (event) => {
+        const inputValue = event.target.value;
+        const allowedPattern = /^(\d+,)*\d+$/;
+        const isValid = inputValue.match(allowedPattern);
+        if (isValid) {
+            setPagesError(false);
+            setPrintingPages(inputValue);
+        }
+        else {
+            setPagesError(true);
+        }
     };
     // state for in 2 mặt or in 1 mặt
     const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
+    const [pageSize, setPageSize] = useState('A4');
+    const [printingPages, setPrintingPages] = useState('');
+    const [pagesError, setPagesError] = useState(false);
     const [singleSidePrinting, setSingleSidePrinting] = useState(false);
     const [doubleSidePrinting, setDoubleSidePrinting] = useState(false);
     const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime);
@@ -127,7 +137,9 @@ export default function HomePage() {
                     </Stack>
 
                     {/*    drop down list*/}
-                    <SelectSize></SelectSize>
+                    <SelectSize
+                        onChange={(e) => setPageSize(e.target.value)}
+                    />
 
                 </Stack>
 
@@ -145,12 +157,14 @@ export default function HomePage() {
                             <TextField
                                 id="printingPages"
                                 sx={{borderRadius: '20px'}}
-                                onChange={handleInput}
+                                error={pagesError}
+                                helperText={pagesError && "Only allow numbers seperated by commas"}
+                                onChange={handlePagesInput}
                                 placeholder="Enter pages (e.g., 1, 2, 3)"
                             />
-                            <IconButton sx={{p: '10px'}} aria-label="copy-page">
-                                <FileCopyIcon/>
-                            </IconButton>
+                            <FileCopyIcon
+                                sx={{ margin: 2 }}
+                            />
                         </Box>
                     </Stack>
 
@@ -193,7 +207,7 @@ export default function HomePage() {
                 </Typography>
                 <Stack direction={'column'}>
                     <Typography variant='h5'>Tổng số giấy</Typography>
-                    <Typography variant='h1' sx={{color: '#71B8FF'}}> 24</Typography>
+                    <Typography variant='h1' sx={{color: '#71B8FF'}}>24</Typography>
                 </Stack>
 
             </Stack>

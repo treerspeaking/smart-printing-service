@@ -24,10 +24,14 @@ const sizes = [
     {
         value: 'a5',
         label: 'A5',
-      },
-  ];
-const SelectSize = () => {
-    
+    },
+];
+
+interface Props {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SelectSize = ( {onChange} ) => {
 
     return (
         <TextField
@@ -35,6 +39,7 @@ const SelectSize = () => {
           select
           label="Select"
           defaultValue="a4"
+          onChange={e => onChange(e)}
           sx={{marginLeft:'100px'}}
         >
           {sizes.map((option) => (
