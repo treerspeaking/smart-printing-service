@@ -1,20 +1,30 @@
-import { doc, getDoc, setDoc, updateDoc, deleteDoc, FieldValue } from "firebase/firestore";
+import { doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, FieldValue } from "firebase/firestore";
+import { db } from "./Firebase";
 
-class FirestoreMapper {
+export class FirestoreMapper {
   constructor(collectionName) {
     this.collectionName = collectionName;
   }
 
   // Function to fetch user data from Firestore
-  async fetchData(id) {
-    const docRef = doc(db, this.collectionName, id);
+  async getDocument(documentID) {
+    const docRef = doc(db, this.collectionName, documentID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
       return docSnap.data();
     } else {
-      throw new Error("No such document!");
+      console.log("No such document!");
+      return null;
     }
+  }
+
+  async getAllDocuments() {
+    const collectionRef = collection(db, this.collectionName);
+    const querySnapshot = await getDocs(collectionRef);
+    const documents = querySnapshot.docs.map(doc => doc.data());
+    return documents;
   }
 
   async updateDocument(id, newData) {
@@ -22,9 +32,13 @@ class FirestoreMapper {
     await updateDoc(docRef, newData);
   }
 
-
   async createOrOverwriteDocument(id, newData) {
     const docRef = doc(db, this.collectionName, id);
+    await setDoc(docRef, newData);
+  }
+
+  async createDocumentInNestedSubcollection(idPath, newData) {
+    const docRef = doc(db, ...idPath);
     await setDoc(docRef, newData);
   }
 
@@ -37,4 +51,5 @@ class FirestoreMapper {
     const docRef = doc(db, this.collectionName, id);
     await deleteDoc(docRef);
   }
+
 }

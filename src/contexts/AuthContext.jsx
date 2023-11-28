@@ -4,6 +4,7 @@ import { auth , googleProvider, db } from "../firebase/Firebase"; // Import auth
 import {createUserWithEmailAndPassword, signInWithPopup, signOut, signInWithEmailAndPassword} from "firebase/auth"
 import React, { useState, useContext, useEffect } from "react"; // Import useState from react
 import { doc, getDoc } from "firebase/firestore";
+import { studentMapper } from "./mapper/StudentMapper";
 
 const AuthContext = React.createContext();
 
@@ -20,16 +21,9 @@ export function AuthProvider({ children }) {
 
     // Function to fetch user data from Firestore
     const fetchUserData = async (uid) => {
-        const docRef = doc(db, "Student", uid);
-        const docSnap = await getDoc(docRef);
-
-
-        if (docSnap.exists()) {
-            setUserData(docSnap.data());
-			console.log(docSnap.data());
-        } else {
-            console.log("No such document!", uid);
-        }
+		const studentDoc = await studentMapper.getStudentData(uid);
+		console.log(studentDoc);
+		setUserData(studentDoc);
     };
 
 	const signIn = async (email, password) => {
