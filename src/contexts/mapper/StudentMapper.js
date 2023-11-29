@@ -38,7 +38,7 @@ class StudentMapper extends FirestoreMapper {
   async getAllPrintingLogsByStudentID(studentDocumentID){
     const printingLogPath = ['Student', studentDocumentID, 'PrintingLog'];
     
-    return this.getAllDocuments();
+    return this.getAllDocumentsInSubcollection(printingLogPath);
   }
 
   // You can add more methods specific to StudentMapper here
