@@ -38,7 +38,7 @@ export default function HomePage() {
     const [printingPages, setPrintingPages] = useState('');
     const [pagesError, setPagesError] = useState(false);
     const [singleSidePrinting, setSingleSidePrinting] = useState(false);
-    const [doubleSidePrinting, setDoubleSidePrinting] = useState(false);
+    const [doubleSidePrinting, setDoubleSidePrinting] = useState(true);
     const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime);
     const [file, setFile] = useState(null);
 
