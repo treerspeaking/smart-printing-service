@@ -18,6 +18,8 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo/DemoContainer.
 import dayjs from 'dayjs';
 
 import { usePrinter } from '../../contexts/PrinterContext.jsx';
+import { useAuth } from '../../contexts/AuthContext.jsx';
+import { studentMapper } from '../../contexts/mapper/StudentMapper.jsx';
 
 const PrintRequestContent = () => {
     const handlePagesInput = (event) => {
@@ -33,11 +35,11 @@ const PrintRequestContent = () => {
         }
     };
 
+	const { currentUser } = useAuth();
     const availablePrinters = usePrinter();
-    console.log("avaiable printers ", availablePrinters);
     
     // state for in 2 mặt or in 1 mặt
-    const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0)
+    const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
     const [selectedPrinterDocumentID, setSelectedPrinterDocumentID] = useState('');
     const [pageSize, setPageSize] = useState('A4');
     const [printingPages, setPrintingPages] = useState('');
@@ -62,11 +64,65 @@ const PrintRequestContent = () => {
         setDoubleSidePrinting(true);
     };
 
+	const fileToByteArray = (file) => {
+		return new Promise((resolve, reject) => {
+		  const reader = new FileReader();
+		  reader.onloadend = (event) => {
+			const byteArray = new Uint8Array(event.target.result);
+			resolve(byteArray);
+		  };
+		  reader.onerror = reject;
+		  reader.readAsArrayBuffer(file);
+		});
+	  };
+
+	const byteArrayToBase64 = (byteArray) => {
+		let binary = '';
+		const chunkSize = 0xffff; // Use chunks to avoid call stack overflow
+		for (let i = 0; i < byteArray.length; i += chunkSize) {
+		  const chunk = byteArray.subarray(i, i + chunkSize);
+		  binary += String.fromCharCode.apply(null, chunk);
+		}
+		return window.btoa(binary);
+	};
+
+	const handlePrintRequest = async () => {
+		console.log("Printer Doc ID", selectedPrinterDocumentID);
+		console.log("File", file);
+		console.log("Receive Date Time", receiveDateTime);
+		console.log("Page Size", pageSize);
+		console.log("Printing Pages", printingPages);
+		console.log("Single Side Printing", singleSidePrinting);
+		console.log("Double Side Printing", doubleSidePrinting);
+
+		console.log("Current User", currentUser);
+
+		const byteArray = await fileToByteArray(file);
+		const base64 = byteArrayToBase64(byteArray)
+
+		await studentMapper.createPrintingRequest(
+			selectedPrinterDocumentID,
+			currentUser.uid,
+			file.name,
+			base64,
+			dayjs().toDate(),
+			receiveDateTime.toDate(),
+			pageSize,
+			printingPages,
+			singleSidePrinting ? 1 : 2,
+			"Pending"
+		);
+
+	};
+
     //on confirm print box 
 
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleOpen = () =>{
+		handlePrintRequest();		
+		setOpen(true);
+	}
+	const handleClose = () => setOpen(false);
 
 
     return (

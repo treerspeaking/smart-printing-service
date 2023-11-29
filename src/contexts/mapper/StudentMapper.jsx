@@ -1,4 +1,5 @@
 import { FirestoreMapper } from '../../firebase/FirestoreMapper';
+import { doc, collection } from 'firebase/firestore';
 
 class StudentMapper extends FirestoreMapper {
 
@@ -13,10 +14,9 @@ class StudentMapper extends FirestoreMapper {
   }
 
 
-  async createPrintingLog(printerDocumentID, studentDocumentID, documentName, documentBytesteam, timestamp, paperSize, paperPages, paperSides, printingStatus) { 
+  async createPrintingRequest(printerDocumentID, studentDocumentID, documentName, documentBytesteam, timestamp, paperSize, paperPages, paperSides, printingStatus) { 
     
     const printingLogPath = ['Student', studentDocumentID, 'PrintingLog'];
-    
     const mappedPrintingLog = {
       PrinterDocumentID: printerDocumentID,
       StudentDocumentID: studentDocumentID,

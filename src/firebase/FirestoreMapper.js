@@ -45,7 +45,19 @@ export class FirestoreMapper {
   }
 
   async createDocumentInNestedSubcollection(idPath, newData) {
-    const docRef = doc(db, ...idPath);
+    const path = idPath.join('/'); // Joins the elements of the array into a string with the '/' character
+    const printingLogCollection = collection(db, path);
+    console.log("printingLogCollection", printingLogCollection);
+
+    const printingLogDoc = doc(printingLogCollection);
+    console.log("printingLogDoc", printingLogDoc);
+
+    const printingLogId = printingLogDoc.id; // Generates a unique ID
+    console.log("printingLogId", printingLogId);
+    
+    const docRef = doc(db, ...idPath, printingLogId);
+    console.log("docRef", docRef);
+
     await setDoc(docRef, newData);
   }
 
