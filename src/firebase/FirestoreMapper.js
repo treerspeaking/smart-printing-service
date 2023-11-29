@@ -27,6 +27,13 @@ export class FirestoreMapper {
     return documents;
   }
 
+  async getAllDocumentsInSubcollection(idPath) {
+    const collectionRef = collection(db, ...idPath);
+    const querySnapshot = await getDocs(collectionRef);
+    const documents = querySnapshot.docs.map(doc => doc.data());
+    return documents;
+  }
+
   async updateDocument(id, newData) {
     const docRef = doc(db, this.collectionName, id);
     await updateDoc(docRef, newData);
