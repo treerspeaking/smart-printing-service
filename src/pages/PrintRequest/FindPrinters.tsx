@@ -11,31 +11,38 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { TextField } from '@mui/material';
 
+import { useState } from 'react';
 
 interface Props {
-    defaultValue: string;
-    printers: string[];
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  }
+  selectedPrinterDocumentID: string;
+  printers: string[];
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
   
-const FindPrinters = ( {onChange, defaultValue, printers} ) => {
+const FindPrinters = ({ onChange, selectedPrinterDocumentID, printers }) => {
+  const handlePrinterChange = (event) => {
+    console.log(event.target.value);
+    if (event.target && 'value' in event.target) {
+      onChange(event);
+    }
+  };
 
-    return (
-        <TextField
-          id="select-printers"
-          select
-          label="Máy in"
-          defaultValue={defaultValue}
-          onChange={e => onChange(e)}
-          sx={{marginLeft:'100px', width: 100}}
-        >
-          {printers.map((option) => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-        </TextField>
-    );
+  return (
+    <TextField
+      id="select-printers"
+      select
+      label="Máy in"
+      value={selectedPrinterDocumentID}
+      onChange={handlePrinterChange}
+      sx={{marginLeft:'100px', width: 100}}
+    >
+      {printers ? printers.map((printer) => (
+        <MenuItem key={`${printer.Building}-${printer.Room}`} value={printer.docId}>
+          {printer.Building} - {printer.Room}
+        </MenuItem>
+      )) : null}
+    </TextField>
+  );
 };
 
 export default FindPrinters;

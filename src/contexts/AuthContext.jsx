@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
     // Function to fetch user data from Firestore
     const fetchUserData = async (uid) => {
 		const studentDoc = await studentMapper.getStudentData(uid);
-		console.log(studentDoc);
 		setUserData(studentDoc);
     };
 

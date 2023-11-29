@@ -1,4 +1,4 @@
-import { doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, FieldValue } from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, FieldValue } from "firebase/firestore";
 import { db } from "./Firebase";
 
 export class FirestoreMapper {
