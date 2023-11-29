@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import { Box, Typography } from '@mui/material';
 
 const styles = {
     scrollbar: {
@@ -176,10 +177,16 @@ export default function ColumnGroupingTable() {
                             <TableRow hover role="checkbox" tabIndex={-1} key={row.ngayNhan}>
                                 {columns.map((column) => (
                                     <TableCell key={column.id} align={column.align}>
-                                        {column.id === 'tinhTrang' ? (
-                                            <span style={circleStyles.circle} className={row.tinhTrang === 'Hoàn thành' ? 'green' : row.tinhTrang === 'Chưa hoàn thành' ? 'red' : 'yellow'} />
-                                        ) : null}
-                                        {row[column.id]}
+                                        {column.id === "tinhTrang"
+                                            ?
+                                            (<Typography color={row.tinhTrang === 'Hoàn thành' ? 'green' : row.tinhTrang === 'Chưa hoàn thành' ? 'red' : 'orange'}>
+                                                {row[column.id]}
+                                            </Typography>)
+                                            :
+                                            <Typography>
+                                                {row[column.id]}
+                                            </Typography>
+                                        }
                                     </TableCell>
                                 ))}
                             </TableRow>
