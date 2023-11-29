@@ -20,7 +20,7 @@ import dayjs from 'dayjs';
 export default function HomePage() {
     const handlePagesInput = (event) => {
         const inputValue = event.target.value;
-        const allowedPattern = /^(\d+,)*\d+$/;
+        const allowedPattern = /^((\d+,)*\d+|)$/;
         const isValid = inputValue.match(allowedPattern);
         if (isValid) {
             setPagesError(false);
@@ -177,7 +177,7 @@ export default function HomePage() {
                                 error={pagesError}
                                 helperText={pagesError && "Chỉ chấp nhận các con số được cách bởi đấu phẩy"}
                                 onChange={handlePagesInput}
-                                placeholder="Nhập các trang (e.g., 1, 2, 3)"
+                                placeholder="Nhập các trang (v.d., 1, 2, 3)"
                             />
                             <FileCopyIcon
                                 sx={{ margin: 2 }}
