@@ -61,14 +61,23 @@ export default function HomePage() {
 
     return (
         <Stack direction={'column'} sx={{marginLeft: '60px'}}>
-            <Typography variant={'h3'} fontWeight={700}>
-                YÊU CẦU IN
-            </Typography>
+            <Stack direction={'row'} sx={{justifyContent: 'space-between', alignItems: 'start'}}>
+                <Stack direction="column" spacing={3}>
+                    <Typography variant={'h3'} fontWeight={700}>
+                        YÊU CẦU IN
+                    </Typography>
+                    <Typography variant={'h4'} fontWeight={600}>
+                        Chọn máy in
+                    </Typography>
+                </Stack>
+                <Stack direction={'column'} alignItems="center">
+                    <Typography variant='h5'>Tổng số giấy bạn hiện có</Typography>
+                    <Typography variant='h1' sx={{color: '#71B8FF'}}>24</Typography>
+                </Stack>
+
+            </Stack>
             <Stack direction={'column'} spacing={3} sx={{marginTop: '20px'}}>
 
-                <Typography variant={'h4'} fontWeight={600}>
-                    Chọn máy in
-                </Typography>
                 <FindPrinters
                     defaultValue={printer}
                     printers={availablePrinters}
@@ -166,7 +175,7 @@ export default function HomePage() {
                                 id="printingPages"
                                 sx={{borderRadius: '20px'}}
                                 error={pagesError}
-                                helperText={pagesError && "Only allow numbers seperated by commas"}
+                                helperText={pagesError && "Chỉ chấp nhận các con số được cách bởi đấu phẩy"}
                                 onChange={handlePagesInput}
                                 placeholder="Nhập các trang (e.g., 1, 2, 3)"
                             />
@@ -209,19 +218,8 @@ export default function HomePage() {
 
 
             </Stack>
-            <Stack direction={'row'} sx={{justifyContent: 'space-between', alignItems: 'flex-end'}}>
-                <Typography variant='h5'>
-                    Bạn hiện có: 24
-                </Typography>
-                <Stack direction={'column'}>
-                    <Typography variant='h5'>Tổng số giấy</Typography>
-                    <Typography variant='h1' sx={{color: '#71B8FF'}}>24</Typography>
-                </Stack>
-
-            </Stack>
-
             {/*FOOTER*/}
-            <Stack direction={'row'} sx={{justifyContent: 'space-between', marginTop:'67px'}}>
+            <Stack direction={'row'} sx={{justifyContent: 'space-between', marginTop:'10px'}}>
                 <Link to={'/smart-printing-service/Payment'}>
                     <Button variant='contained' sx={{borderRadius: '20px', width: '160px'}}>
                         Mua thêm
@@ -230,10 +228,9 @@ export default function HomePage() {
 
                 <Stack direction={'row'} spacing={'34px'}>
                     <Link to={'/smart-printing-service'}>
-                        <Button variant='contained' sx={{
+                        <Button variant='outlined' sx={{
                             borderRadius: '20px',
-                            backgroundColor: 'white',
-                            color: '#71B8FF',
+                            color: 'black',
                             '&:hover': {backgroundColor: 'white'},
                             width: '160px'
                         }}>
