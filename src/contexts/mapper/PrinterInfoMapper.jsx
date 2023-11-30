@@ -12,9 +12,9 @@ class PrinterInfoMapper extends FirestoreMapper {
   }
 
   async getAllPrinterInfo(){
-    console.log("Getting all printer info");
+    
     const result = await this.getAllDocuments();
-    console.log("All printer info ", result);
+    
     return result;
   }
   
