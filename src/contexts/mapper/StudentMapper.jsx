@@ -14,7 +14,7 @@ class StudentMapper extends FirestoreMapper {
   }
 
 
-  async createPrintingRequest(printerDocumentID, studentDocumentID, documentName, documentBytesteam, timestamp, paperSize, paperPages, paperSides, printingStatus) { 
+  async createPrintingRequest(printerDocumentID, studentDocumentID, documentName, documentBytesteam, receiveRequestTimestamp, printTimestamp, paperSize, paperPages, paperSides, printingStatus) { 
     
     const printingLogPath = ['Student', studentDocumentID, 'PrintingLog'];
     const mappedPrintingLog = {
@@ -22,8 +22,8 @@ class StudentMapper extends FirestoreMapper {
       StudentDocumentID: studentDocumentID,
       DocumentName: documentName,
       DocumentBytesteam: documentBytesteam,
-      ReceiveRequestTimestamp: timestamp,
-      PrintTimestamp: timestamp,
+      ReceiveRequestTimestamp: receiveRequestTimestamp,
+      PrintTimestamp: printTimestamp,
       PaperSize: paperSize,
       PaperPages: paperPages,
       PaperSides: paperSides,

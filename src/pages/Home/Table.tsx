@@ -10,6 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { Box, Typography } from '@mui/material';
 
+import { studentMapper } from '../../contexts/mapper/StudentMapper';
+import { usePrinter } from '../../contexts/PrinterContext';
+import { useAuth } from '../../contexts/AuthContext';
+
 const styles = {
     scrollbar: {
         width: 0,
@@ -77,19 +81,6 @@ function createData(
     return { ngayNhan, ngayDat, tenFile, tenMayIn, viTri, tinhTrang };
 }
 
-const rows = [
-    createData('2023-10-28', '2023-10-25', 'example.pdf', 'Printer A', 'A1', 'Hoàn thành'),
-    createData('2023-10-27', '2023-10-24', 'document.doc', 'Printer B', 'B2', 'Chưa hoàn thành'),
-    createData('2023-10-26', '2023-10-23', 'image.jpg', 'Printer C', 'C3', 'Đã gửi đi'),
-    createData('2023-10-29', '2023-10-26', 'data.csv', 'Printer D', 'D4', 'Đang xử lý'),
-    createData('2023-10-30', '2023-10-27', 'presentation.ppt', 'Printer E', 'E5', 'Hoàn thành'),
-    createData('2023-10-31', '2023-10-28', 'spreadsheet.xlsx', 'Printer F', 'F6', 'Chưa hoàn thành'),
-    createData('2023-11-01', '2023-10-29', 'drawing.pdf', 'Printer G', 'G7', 'Đã gửi đi'),
-    createData('2023-11-02', '2023-10-30', 'report.doc', 'Printer H', 'H8', 'Hoàn thành'),
-    createData('2023-11-03', '2023-10-31', 'photo.jpg', 'Printer I', 'I9', 'Chưa hoàn thành'),
-    createData('2023-11-04', '2023-11-01', 'data.csv', 'Printer J', 'J10', 'Đang xử lý'),
-];
-
 const circleStyles = {
     circle: {
         width: '12px',
@@ -118,6 +109,57 @@ export default function ColumnGroupingTable() {
     const [orderBy, setOrderBy] = React.useState('ngayNhan');
     const [order, setOrder] = React.useState('asc');
 
+
+    const user = useAuth().currentUser;
+    const printerData = usePrinter();
+
+    //const rows = [
+    //    createData('2023-10-28', '2023-10-25', 'example.pdf', 'Printer A', 'A1', 'Hoàn thành'),
+    //    createData('2023-10-27', '2023-10-24', 'document.doc', 'Printer B', 'B2', 'Chưa hoàn thành'),
+    //    createData('2023-10-26', '2023-10-23', 'image.jpg', 'Printer C', 'C3', 'Đã gửi đi'),
+    //    createData('2023-10-29', '2023-10-26', 'data.csv', 'Printer D', 'D4', 'Đang xử lý'),
+    //    createData('2023-10-30', '2023-10-27', 'presentation.ppt', 'Printer E', 'E5', 'Hoàn thành'),
+    //    createData('2023-10-31', '2023-10-28', 'spreadsheet.xlsx', 'Printer F', 'F6', 'Chưa hoàn thành'),
+    //    createData('2023-11-01', '2023-10-29', 'drawing.pdf', 'Printer G', 'G7', 'Đã gửi đi'),
+    //    createData('2023-11-02', '2023-10-30', 'report.doc', 'Printer H', 'H8', 'Hoàn thành'),
+    //    createData('2023-11-03', '2023-10-31', 'photo.jpg', 'Printer I', 'I9', 'Chưa hoàn thành'),
+    //    createData('2023-11-04', '2023-11-01', 'data.csv', 'Printer J', 'J10', 'Đang xử lý'),
+    //];
+    
+    const [tableRows, setTableRows] = React.useState<Data[]>([]);
+    
+
+    const fetchPrinterData = async (PrinterDocumentID) => {
+        console.log(printerData);
+        
+        const printer = printerData ? printerData.find(printer => printer.docId === PrinterDocumentID) : null;
+        return printer;
+    }
+
+    const fetchPrintingLogData = async () => {
+        const logs = await studentMapper.getAllPrintingLogsByStudentID(user.uid);
+        const data = await Promise.all(logs.map(async (log) => {
+            const printer = await fetchPrinterData(log.PrinterDocumentID);
+
+            const rowData = createData(
+                log.ReceiveRequestTimestamp.toDate().toString(),
+                log.PrintTimestamp.toDate().toString(),
+                log.DocumentName,
+                printer ? (printer.Brand + ' ' + printer.Model) : "",
+                printer ? (printer.Campus + ' ' + printer.Building + ' - ' + printer.Room) : "",
+                log.PrintingStatus
+            );
+            return rowData;
+        }));
+
+        setTableRows(data);
+    };
+
+    React.useEffect(() => {
+        fetchPrintingLogData();
+    }, [user.uid, printerData]);
+
+    
     const handleRequestSort = (property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -128,7 +170,7 @@ export default function ColumnGroupingTable() {
         handleRequestSort(property);
     };
 
-    const sortedRows = rows
+    const sortedRows = tableRows
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .sort((a, b) => {
             const isAsc = order === 'asc';
@@ -144,6 +186,8 @@ export default function ColumnGroupingTable() {
         setPage(0);
     };
 
+
+    
     return (
         <Paper sx={{ width: '100%'}} >
             <TableContainer sx={{ maxHeight: 440,  }}>
@@ -198,7 +242,7 @@ export default function ColumnGroupingTable() {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                count={tableRows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
