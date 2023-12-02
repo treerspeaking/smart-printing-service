@@ -40,7 +40,7 @@ const PrintRequestContent = () => {
     
     // state for in 2 mặt or in 1 mặt
     const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
-    const [selectedPrinterDocumentID, setSelectedPrinterDocumentID] = useState('');
+    const [selectedPrinterDocumentID, setSelectedPrinterDocumentID] = useState(null);
     const [pageSize, setPageSize] = useState('A4');
     const [printingPages, setPrintingPages] = useState('');
     const [pagesError, setPagesError] = useState(false);
@@ -48,7 +48,7 @@ const PrintRequestContent = () => {
     const [doubleSidePrinting, setDoubleSidePrinting] = useState(true);
     const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime);
     const [file, setFile] = useState(null);
-
+    
     const printerNamesAndLocations = availablePrinters?.map(printer => ({
         name: printer.name,
         location: printer.location
@@ -148,7 +148,8 @@ const PrintRequestContent = () => {
 			
 				<FindPrinters
 					printers={availablePrinters}
-        			selectedPrinter={selectedPrinterDocumentID} 
+                    
+        			selectedPrinterDocumentID={selectedPrinterDocumentID} 
 					onChange={(e) => setSelectedPrinterDocumentID(e.target.value)}
 				/>
                 

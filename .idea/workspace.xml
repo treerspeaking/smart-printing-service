@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68e399de-0095-4598-910e-72d095c51a92" name="Changes" comment="feat: add modal for payment page">
-      <change afterPath="$PROJECT_DIR$/src/pages/PrintRequest/FindPrinters.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/PrintRequest/SelectSize.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/PrintRequest/SuccessModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Feedback/ContentField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Feedback/ContentField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Feedback/FeedbackContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Feedback/FeedbackContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home/PrintRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/PrintRequest.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/PrintRequest/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PrintRequest/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,24 +58,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "develop",
-    "last_opened_file_path": "D:/231/Software Engineering/capstone_project/code/smart-printing-service/public",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "D:\\Program Files\\WebStorm 2023.2.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/231/Software Engineering/capstone_project/code/smart-printing-service/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\WebStorm 2023.2.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -132,7 +123,9 @@
       <workItem from="1700310698784" duration="1167000" />
       <workItem from="1700614577447" duration="9787000" />
       <workItem from="1700639718775" duration="11005000" />
-      <workItem from="1700673585733" duration="1748000" />
+      <workItem from="1700673585733" duration="2337000" />
+      <workItem from="1700969342285" duration="545000" />
+      <workItem from="1700974281655" duration="9000" />
     </task>
     <servers />
   </component>

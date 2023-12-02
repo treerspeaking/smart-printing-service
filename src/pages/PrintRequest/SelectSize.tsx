@@ -11,7 +11,7 @@ interface Props {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SelectSize = ( {onChange, defaultValue} ) => {
+const SelectSize = ( {onChange, defaultValue}) => {
 
     return (
         <TextField
@@ -21,6 +21,7 @@ const SelectSize = ( {onChange, defaultValue} ) => {
           defaultValue={defaultValue}
           onChange={e => onChange(e)}
           sx={{ marginLeft:'100px', width: 75 }}
+          
         >
           {sizes.map((option) => (
             <MenuItem key={option} value={option}>
