@@ -44,6 +44,11 @@ export class FirestoreMapper {
     await setDoc(docRef, newData);
   }
 
+  async removeDocument(id) {
+    const docRef = doc(db, this.collectionName, id);
+    await deleteDoc(docRef);
+  }
+
   async createDocumentInNestedSubcollection(idPath, newData) {
     const path = idPath.join('/'); // Joins the elements of the array into a string with the '/' character
     const printingLogCollection = collection(db, path);
@@ -61,14 +66,28 @@ export class FirestoreMapper {
     await setDoc(docRef, newData);
   }
 
+  async createOrUpdateField(id, field, value) {
+    const docRef = doc(db, this.collectionName, id);
+    await setDoc(docRef, { [field]: value }, { merge: true });
+  }
+
+  async getFieldValue(id, field) {
+    const docRef = doc(db, this.collectionName, id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      return docSnap.data()[field];
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  }
+
   async removeField(id, field) {
     const docRef = doc(db, this.collectionName, id);
     await updateDoc(docRef, { [field]: FieldValue.delete() });
   }
 
-  async removeDocument(id) {
-    const docRef = doc(db, this.collectionName, id);
-    await deleteDoc(docRef);
-  }
 
 }

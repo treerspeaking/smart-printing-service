@@ -32,16 +32,25 @@ class StudentMapper extends FirestoreMapper {
     };
 
 
-    return this.createDocumentInNestedSubcollection(printingLogPath, mappedPrintingLog);
+    return await this.createDocumentInNestedSubcollection(printingLogPath, mappedPrintingLog);
   }
 
   async getAllPrintingLogsByStudentID(studentDocumentID){
     const printingLogPath = ['Student', studentDocumentID, 'PrintingLog'];
     
-    return this.getAllDocumentsInSubcollection(printingLogPath);
+    return await this.getAllDocumentsInSubcollection(printingLogPath);
   }
 
-  // You can add more methods specific to StudentMapper here
+  async updatePageBalance(studentDocumentID, newPageBalance){
+    const field = "PageBalance";
+    return await this.createOrUpdateField(studentDocumentID, field, newPageBalance);
+  }
+
+  async getPageBalance(studentDocumentID){
+    const field = "PageBalance";
+    return await this.getFieldValue(studentDocumentID, field);
+  }
+
 }
   
  

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Button, Modal, Stack, Typography} from "@mui/material";
 import FindPrinters from "./FindPrinters.tsx";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
@@ -21,6 +21,7 @@ import { usePrinter } from '../../contexts/PrinterContext.jsx';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { studentMapper } from '../../contexts/mapper/StudentMapper.jsx';
 
+
 const PrintRequestContent = () => {
     const handlePagesInput = (event) => {
         const inputValue = event.target.value;
@@ -37,6 +38,7 @@ const PrintRequestContent = () => {
 
 	const { currentUser } = useAuth();
     const availablePrinters = usePrinter();
+    const [pageBalance, setPageBalance] = useState();
     
     // state for in 2 mặt or in 1 mặt
     const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
@@ -115,6 +117,17 @@ const PrintRequestContent = () => {
 
 	};
 
+
+    useEffect(() => {
+        const fetchPageBalance = async () => {
+          const balance = await studentMapper.getPageBalance(currentUser.uid);
+          setPageBalance(balance);
+        };
+    
+        fetchPageBalance();
+      }, [currentUser]);
+
+      
     //on confirm print box 
 
     const [open, setOpen] = React.useState(false);
@@ -136,7 +149,7 @@ const PrintRequestContent = () => {
                 </Stack>
                 <Stack direction={'column'} alignItems="center">
                     <Typography variant='h5'>Tổng số giấy bạn hiện có</Typography>
-                    <Typography variant='h1' sx={{color: '#71B8FF'}}>24</Typography>
+                    <Typography variant='h1' sx={{color: '#71B8FF'}}> {pageBalance} </Typography>
                 </Stack>
 
             </Stack>
