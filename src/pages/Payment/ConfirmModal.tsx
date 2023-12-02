@@ -1,6 +1,12 @@
 // @ts-ignore
 import React from 'react';
 import {Box, Button, Modal, Stack, Typography} from "@mui/material";
+
+import {useAuth} from "../../contexts/AuthContext";
+import { studentMapper } from '../../contexts/mapper/StudentMapper';
+
+import { useState, useEffect } from 'react';
+
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -22,9 +28,28 @@ interface Props
 
 }
 const ConfirmModal = ({handleClose,open,paperQuantity,payAmount}:Props) => {
+
+    const { currentUser } = useAuth();    
+    const [paperAdd, setPaperAdd] = useState(paperQuantity);
+    const [ active, setActive] = React.useState(open);
+
+    useEffect(() => {
+        setActive(open);
+    }, [open]);
+
+    useEffect(() => {
+        setPaperAdd(paperQuantity);
+    }
+    , [paperQuantity]);
+
+    const handlePay = async () => {
+        await studentMapper.addPageBalance(currentUser.uid, paperAdd);
+        handleClose();
+    }
+
     return (
         <Modal
-            open={open}
+            open={active}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -45,9 +70,23 @@ const ConfirmModal = ({handleClose,open,paperQuantity,payAmount}:Props) => {
                         </Typography>
                     </Stack>
 
-                    <Button variant = 'contained' sx={{borderRadius:'100px'}} href={'https://bkpay.hcmut.edu.vn/bkpay/'}>
-                        Tiếp tục đến bkpay
+                    <Button 
+                    variant='contained' 
+                    sx={{borderRadius:'100px'}} 
+                    href={'https://bkpay.hcmut.edu.vn/bkpay/'} 
+                    onClick={handlePay}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >
+                    Tiếp tục đến bkpay
                     </Button>
+                    <Button 
+                    variant='contained' 
+                    sx={{borderRadius:'100px'}} 
+                    onClick={handleClose}
+                >
+                    Cancel
+                </Button>
                 </Stack>
             </Box>
 

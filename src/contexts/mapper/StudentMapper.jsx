@@ -41,14 +41,19 @@ class StudentMapper extends FirestoreMapper {
     return await this.getAllDocumentsInSubcollection(printingLogPath);
   }
 
-  async updatePageBalance(studentDocumentID, newPageBalance){
-    const field = "PageBalance";
-    return await this.createOrUpdateField(studentDocumentID, field, newPageBalance);
-  }
-
+  
   async getPageBalance(studentDocumentID){
     const field = "PageBalance";
     return await this.getFieldValue(studentDocumentID, field);
+  }
+
+  
+  async addPageBalance(studentDocumentID, newPageBalance){
+    const field = "PageBalance";
+
+    const currentPageBalance = await this.getPageBalance(studentDocumentID);
+    console.log("Current page balance: ", currentPageBalance);
+    return await this.createOrUpdateField(studentDocumentID, field, currentPageBalance + newPageBalance);
   }
 
 }

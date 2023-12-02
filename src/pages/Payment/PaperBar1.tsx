@@ -8,12 +8,17 @@ interface Props
 {
     paperQuantity: number
     payAmount: number
+    handleUpdate:()=>void
 }
-export const PaperBar1 = ({paperQuantity,payAmount}:Props) => {
+export const PaperBar1 = ({paperQuantity,payAmount, handleUpdate}:Props) => {
     const [modalOpen, setModalOpen] = React.useState(false  )
 
     const handleOpen = () => setModalOpen(true);
-    const handleClose = () => setModalOpen(false);
+    const handleClose = () =>{
+      handleUpdate();
+      setModalOpen(false);
+
+    }
 
     return (
     <Paper elevation={2} sx={{ backgroundColor: '#91BDEE',borderRadius:'20px', height:'133px' }}>

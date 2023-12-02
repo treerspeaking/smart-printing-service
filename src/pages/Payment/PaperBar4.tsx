@@ -4,7 +4,13 @@ import {Button, Paper, Stack, Typography} from '@mui/material'
 import SelectQuantity from './SelectQuantity'
 import ConfirmModal from "./ConfirmModal";
 
-export const PaperBar4 = () => {
+
+interface Props {
+    handleUpdate:()=>void    
+}
+
+
+export const PaperBar4 = ({handleUpdate}: Props) => {
     const [quantity, setQuantity] = React.useState(0)
     const handleIncrement = () => {
         setQuantity(quantity + 1)
@@ -25,7 +31,10 @@ export const PaperBar4 = () => {
     const [modalOpen, setModalOpen] = React.useState(false)
 
     const handleOpen = () => setModalOpen(true);
-    const handleClose = () => setModalOpen(false);
+    const handleClose = () =>{
+        handleUpdate();
+        setModalOpen(false);
+    } 
 
     return (
         <Paper elevation={2}

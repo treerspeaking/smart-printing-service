@@ -11,14 +11,17 @@ interface Props {
     buttonHoverColor: string
     paperQuantity: number
     payAmount: number
+    handleUpdate:()=>void    
 }
 
-export const PaperBar2 = ({bgColor, buttonColor, content, buttonTextColor, buttonHoverColor, paperQuantity, payAmount}: Props) => {
+
+export const PaperBar2 = ({bgColor, buttonColor, content, buttonTextColor, buttonHoverColor, paperQuantity, payAmount, handleUpdate}: Props) => {
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => {
         setOpen(true)
     }
     const handleClose = () => {
+        handleUpdate();
         setOpen(false)
     }
     return (
