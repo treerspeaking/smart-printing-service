@@ -30,6 +30,8 @@ const PrintRequestContent = () => {
         if (isValid) {
             setPagesError(false);
             setPrintingPages(inputValue);
+            let pagesCount = inputValue.split(",").length
+            setPagesPrinted(pagesCount)
         }
         else {
             setPagesError(true);
@@ -39,7 +41,7 @@ const PrintRequestContent = () => {
 	const { currentUser } = useAuth();
     const { printerData } = usePrinter();
     const [pageBalance, setPageBalance] = useState();
-    
+    const [pagesPrinted,setPagesPrinted] = useState(0);  
     // state for in 2 mặt or in 1 mặt
     const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
     const [selectedPrinterDocument, setSelectedPrinterDocument] = useState(null);
@@ -89,6 +91,12 @@ const PrintRequestContent = () => {
 		console.log("File", file);
 		console.log("Receive Date Time", receiveDateTime);
 		console.log("Page Size", pageSize);
+        if(!singleSidePrinting)
+        {
+            setPagesPrinted(Math.ceil(pagesPrinted/2))
+            setPageBalance(pageBalance-pagesPrinted)
+        }
+        console.log ("How many pages to be printed? ",singleSidePrinting?pagesPrinted:Math.ceil(pagesPrinted/2)) // ? 
 		console.log("Printing Pages", printingPages);
 		console.log("Single Side Printing", singleSidePrinting);
 		console.log("Double Side Printing", doubleSidePrinting);
