@@ -113,19 +113,6 @@ export default function ColumnGroupingTable() {
     const user = useAuth().currentUser;
     const printerData = usePrinter();
 
-    //const rows = [
-    //    createData('2023-10-28', '2023-10-25', 'example.pdf', 'Printer A', 'A1', 'Hoàn thành'),
-    //    createData('2023-10-27', '2023-10-24', 'document.doc', 'Printer B', 'B2', 'Chưa hoàn thành'),
-    //    createData('2023-10-26', '2023-10-23', 'image.jpg', 'Printer C', 'C3', 'Đã gửi đi'),
-    //    createData('2023-10-29', '2023-10-26', 'data.csv', 'Printer D', 'D4', 'Đang xử lý'),
-    //    createData('2023-10-30', '2023-10-27', 'presentation.ppt', 'Printer E', 'E5', 'Hoàn thành'),
-    //    createData('2023-10-31', '2023-10-28', 'spreadsheet.xlsx', 'Printer F', 'F6', 'Chưa hoàn thành'),
-    //    createData('2023-11-01', '2023-10-29', 'drawing.pdf', 'Printer G', 'G7', 'Đã gửi đi'),
-    //    createData('2023-11-02', '2023-10-30', 'report.doc', 'Printer H', 'H8', 'Hoàn thành'),
-    //    createData('2023-11-03', '2023-10-31', 'photo.jpg', 'Printer I', 'I9', 'Chưa hoàn thành'),
-    //    createData('2023-11-04', '2023-11-01', 'data.csv', 'Printer J', 'J10', 'Đang xử lý'),
-    //];
-    
     const [tableRows, setTableRows] = React.useState<Data[]>([]);
     
 
@@ -136,14 +123,22 @@ export default function ColumnGroupingTable() {
         return printer;
     }
 
+    const formatVNDate = (date) => {
+        const options = { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' };
+        const vnDate = new Date(date).toLocaleString('vi-VN', options);
+        const dayNames = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+        const dayName = dayNames[new Date(date).getDay()];
+        return `${dayName} ${vnDate}`;
+      };
+
     const fetchPrintingLogData = async () => {
         const logs = await studentMapper.getAllPrintingLogsByStudentID(user.uid);
         const data = await Promise.all(logs.map(async (log) => {
             const printer = await fetchPrinterData(log.id);
 
             const rowData = createData(
-                log.ReceiveRequestTimestamp.toDate().toString(),
-                log.PrintTimestamp.toDate().toString(),
+                formatVNDate(log.ReceiveRequestTimestamp.toDate()),
+                formatVNDate(log.PrintTimestamp.toDate()),
                 log.DocumentName,
                 printer ? (printer.Brand + ' ' + printer.Model) : "",
                 printer ? (printer.Campus + ' ' + printer.Building + ' - ' + printer.Room) : "",
