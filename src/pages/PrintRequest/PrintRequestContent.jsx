@@ -42,7 +42,7 @@ const PrintRequestContent = () => {
     
     // state for in 2 mặt or in 1 mặt
     const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
-    const [selectedPrinterDocumentID, setSelectedPrinterDocumentID] = useState(null);
+    const [selectedPrinterDocument, setSelectedPrinterDocument] = useState(null);
     const [pageSize, setPageSize] = useState('A4');
     const [printingPages, setPrintingPages] = useState('');
     const [pagesError, setPagesError] = useState(false);
@@ -51,10 +51,6 @@ const PrintRequestContent = () => {
     const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime);
     const [file, setFile] = useState(null);
     
-    const printerNamesAndLocations = availablePrinters?.map(printer => ({
-        name: printer.name,
-        location: printer.location
-    }));
 
     const handleSingleSidePrintingChange = () => {
         setSingleSidePrinting(true);
@@ -89,7 +85,7 @@ const PrintRequestContent = () => {
 	};
 
 	const handlePrintRequest = async () => {
-		console.log("Printer Doc ID", selectedPrinterDocumentID);
+		console.log("Printer Doc ID", selectedPrinterDocument.id);
 		console.log("File", file);
 		console.log("Receive Date Time", receiveDateTime);
 		console.log("Page Size", pageSize);
@@ -103,7 +99,7 @@ const PrintRequestContent = () => {
 		const base64 = byteArrayToBase64(byteArray)
 
 		await studentMapper.createPrintingRequest(
-			selectedPrinterDocumentID,
+			selectedPrinterDocument.id,
 			currentUser.uid,
 			file.name,
 			base64,
@@ -162,8 +158,8 @@ const PrintRequestContent = () => {
 				<FindPrinters
 					printers={availablePrinters}
                     
-        			selectedPrinterDocumentID={selectedPrinterDocumentID} 
-					onChange={(e) => setSelectedPrinterDocumentID(e.target.value)}
+        			selectedPrinterDocumentID={selectedPrinterDocument} 
+					onChange={(e) => setSelectedPrinterDocument(e.target.value)}
 				/>
                 
                 

@@ -23,14 +23,21 @@ export class FirestoreMapper {
   async getAllDocuments() {
     const collectionRef = collection(db, this.collectionName);
     const querySnapshot = await getDocs(collectionRef);
-    const documents = querySnapshot.docs.map(doc => doc.data());
+    const documents = querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      data.id = doc.id;
+      return data;
+    });
     return documents;
   }
-
   async getAllDocumentsInSubcollection(idPath) {
     const collectionRef = collection(db, ...idPath);
     const querySnapshot = await getDocs(collectionRef);
-    const documents = querySnapshot.docs.map(doc => doc.data());
+    const documents = querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      data.id = doc.id;
+      return data;
+    });
     return documents;
   }
 

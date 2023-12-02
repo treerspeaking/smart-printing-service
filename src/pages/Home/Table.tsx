@@ -117,9 +117,11 @@ export default function ColumnGroupingTable() {
     
 
     const fetchPrinterData = async (PrinterDocumentID) => {
-        console.log(printerData);
+        console.log(printerData, PrinterDocumentID);
         
-        const printer = printerData ? printerData.find(printer => printer.id === PrinterDocumentID) : null;
+        const printer = printerData ? printerData.find(printer => {
+            return printer.id === PrinterDocumentID
+        }) : null;
         return printer;
     }
 
@@ -140,7 +142,7 @@ export default function ColumnGroupingTable() {
     const fetchPrintingLogData = async () => {
         const logs = await studentMapper.getAllPrintingLogsByStudentID(user.uid);
         const data = await Promise.all(logs.map(async (log) => {
-            const printer = await fetchPrinterData(log.id);
+            const printer = await fetchPrinterData(log.PrinterDocumentID);
 
             const rowData = createData(
                 formatVNDate(log.ReceiveRequestTimestamp.toDate()),
