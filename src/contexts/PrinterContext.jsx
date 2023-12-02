@@ -12,16 +12,20 @@ export const usePrinter = () => {
 export const PrinterProvider = ({ children }) => {
   const [printerData, setPrinterData] = useState(null);
 
+  const fetchPrinterData = async () => {
+    const data = await printerInfoMapper.getAllPrinterInfo();
+    setPrinterData(data);
+    return data;
+  };
+
   useEffect(() => {
-    const fetchPrinterData = async () => {
-      const data = await printerInfoMapper.getAllPrinterInfo();
-      setPrinterData(data);
-    };
     fetchPrinterData();
   }, []);
 
+  const value = { printerData, fetchPrinterData};
+
   return (
-    <PrinterContext.Provider value={printerData}>
+    <PrinterContext.Provider value={value}>
       {children}
     </PrinterContext.Provider>
   );

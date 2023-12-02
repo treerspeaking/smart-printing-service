@@ -37,7 +37,7 @@ const PrintRequestContent = () => {
     };
 
 	const { currentUser } = useAuth();
-    const availablePrinters = usePrinter();
+    const { printerData } = usePrinter();
     const [pageBalance, setPageBalance] = useState();
     
     // state for in 2 mặt or in 1 mặt
@@ -156,7 +156,7 @@ const PrintRequestContent = () => {
                 </Typography>
 			
 				<FindPrinters
-					printers={availablePrinters}
+					printers={printerData}
                     
         			selectedPrinterDocumentID={selectedPrinterDocument} 
 					onChange={(e) => setSelectedPrinterDocument(e.target.value)}

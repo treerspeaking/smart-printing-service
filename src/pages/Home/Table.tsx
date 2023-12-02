@@ -111,17 +111,21 @@ export default function ColumnGroupingTable() {
 
 
     const user = useAuth().currentUser;
-    const printerData = usePrinter();
+    const {printerData, fetchPrinterData} = usePrinter();
 
     const [tableRows, setTableRows] = React.useState<Data[]>([]);
     
 
-    const fetchPrinterData = async (PrinterDocumentID) => {
+    const findPrinterFromData = async (PrinterDocumentID) => {
         console.log(printerData, PrinterDocumentID);
         
+    
         const printer = printerData ? printerData.find(printer => {
             return printer.id === PrinterDocumentID
-        }) : null;
+        }) : await fetchPrinterData().find(printer => {
+                return printer.id === PrinterDocumentID 
+            });
+            
         return printer;
     }
 
@@ -142,7 +146,7 @@ export default function ColumnGroupingTable() {
     const fetchPrintingLogData = async () => {
         const logs = await studentMapper.getAllPrintingLogsByStudentID(user.uid);
         const data = await Promise.all(logs.map(async (log) => {
-            const printer = await fetchPrinterData(log.PrinterDocumentID);
+            const printer = await findPrinterFromData(log.PrinterDocumentID);
 
             const rowData = createData(
                 formatVNDate(log.ReceiveRequestTimestamp.toDate()),
