@@ -123,13 +123,19 @@ export default function ColumnGroupingTable() {
         return printer;
     }
 
-    const formatVNDate = (date) => {
-        const options = { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formatVNDate = (date: Date) => {
+        const options: Intl.DateTimeFormatOptions = {
+            hour: '2-digit',
+            minute: '2-digit',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric' as const,
+        };
         const vnDate = new Date(date).toLocaleString('vi-VN', options);
         const dayNames = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
         const dayName = dayNames[new Date(date).getDay()];
         return `${dayName} ${vnDate}`;
-      };
+    };
 
     const fetchPrintingLogData = async () => {
         const logs = await studentMapper.getAllPrintingLogsByStudentID(user.uid);
