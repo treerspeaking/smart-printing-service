@@ -103,7 +103,7 @@ const PrintRequestContent = () => {
     // A4 1 trang A3 2 trang
     const pageSizeMultiplier = pageSize === 'A4' ? 1 : 2
     let newPagesPrinted = pagesCountAfterSide * pageSizeMultiplier;
-    const temp = pageBalance
+    
     const newPageBalance = pageBalance - newPagesPrinted
 
     
@@ -119,7 +119,7 @@ const PrintRequestContent = () => {
       setPageBalanceError(true)
       alert("Vượt quá giới hạn giấy!. Vui lòng mua thêm")
       setOpen(false)
-      return 
+      
     }
     // if(!singleSidePrinting)
     // {
@@ -172,7 +172,12 @@ const PrintRequestContent = () => {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
-    if(file&&selectedPrinterDocument&&printingPages&&balanceError===false)
+    if(!balanceError) 
+    {
+      alert("Vui long mua them giay")
+      return
+    }
+    if(file&&selectedPrinterDocument&&printingPages)
     {
 
       handlePrintRequest();
@@ -198,11 +203,7 @@ const PrintRequestContent = () => {
         {
           setPagesError(true)
         }
-        if(!balanceError)
-        {
-          alert("Vui long mua them giay")
-          return 
-        }
+        
         
     }
   }
