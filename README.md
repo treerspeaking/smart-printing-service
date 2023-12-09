@@ -19,7 +19,7 @@ You can login with a pre-existing account
 - Password: 123456
 
 ## Contribution
-If you are interested in making contribution to our project, you can do the following steps:
+If you are interested in making contributions to our project, you can do the following steps:
 1. Fork the repository
 2. On the directory of the project, run ```npm install``` to install all the dependencies
 3. Run ```npm run dev``` to run the project in development mode
