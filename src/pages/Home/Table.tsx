@@ -33,8 +33,8 @@ interface Column {
 }
 
 const columns: Column[] = [
-    { id: 'ngayNhan', label: 'Ngày nhận', minWidth: 170 },
-    { id: 'ngayDat', label: 'Ngày đặt', minWidth: 100 },
+    { id: 'ngayNhan', label: 'Ngày đặt', minWidth: 170 },
+    { id: 'ngayDat', label: 'Ngày nhận', minWidth: 100 },
     {
         id: 'tenFile',
         label: 'Tên file',
