@@ -14,8 +14,10 @@ class StudentMapper extends FirestoreMapper {
   }
 
 
-  async createPrintingRequest(printerDocumentID, studentDocumentID, documentName, documentBytesteam, receiveRequestTimestamp, printTimestamp, paperSize, paperPages, paperSides, printingStatus) { 
+  async createPrintingRequest(printerDocumentID, studentDocumentID, documentName, documentBytesteam, receiveRequestTimestamp, printTimestamp, paperSize, paperPages, paperSides, printingStatus, newPageBalance) { 
     
+
+
     const printingLogPath = ['Student', studentDocumentID, 'PrintingLog'];
     const mappedPrintingLog = {
       PrinterDocumentID: printerDocumentID,
@@ -30,7 +32,7 @@ class StudentMapper extends FirestoreMapper {
       PrintingStatus: printingStatus
       // Add any other properties you want to map
     };
-
+    await this.upDateBalance(studentDocumentID, newPageBalance);
 
     return await this.createDocumentInNestedSubcollection(printingLogPath, mappedPrintingLog);
   }
@@ -48,12 +50,19 @@ class StudentMapper extends FirestoreMapper {
   }
 
   
-  async addPageBalance(studentDocumentID, newPageBalance){
+  async addPageBalance(studentDocumentID, boughtPage) {
     const field = "PageBalance";
 
     const currentPageBalance = await this.getPageBalance(studentDocumentID);
     console.log("Current page balance: ", currentPageBalance);
-    return await this.createOrUpdateField(studentDocumentID, field, currentPageBalance + newPageBalance);
+    return await this.createOrUpdateField(studentDocumentID, field, currentPageBalance + boughtPage);
+  }
+
+  async upDateBalance(studentDocumentID, newPageBalance) {
+    // update the student page balance
+    const field = "PageBalance";
+
+    return await this.createOrUpdateField(studentDocumentID, field, newPageBalance);
   }
 
 }

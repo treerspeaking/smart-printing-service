@@ -24,6 +24,7 @@ import { studentMapper } from '../../contexts/mapper/StudentMapper.jsx';
 
 const PrintRequestContent = () => {
     const handlePagesInput = (event) => {
+        // caculate the number of page need to be printed
         const inputValue = event.target.value;
         const allowedPattern = /^((\d+,)*\d+|)$/;
         const isValid = inputValue.match(allowedPattern);
@@ -87,16 +88,21 @@ const PrintRequestContent = () => {
 	};
 
 	const handlePrintRequest = async () => {
-		console.log("Printer Doc ID", selectedPrinterDocument.id);
-		console.log("File", file);
-		console.log("Receive Date Time", receiveDateTime);
-		console.log("Page Size", pageSize);
-        if(!singleSidePrinting)
-        {
-            setPagesPrinted(Math.ceil(pagesPrinted/2))
-            setPageBalance(pageBalance-pagesPrinted)
-        }
-        console.log ("How many pages to be printed? ",singleSidePrinting?pagesPrinted:Math.ceil(pagesPrinted/2)) // ? 
+    const newPagesPrinted = singleSidePrinting ? pagesPrinted : Math.ceil(pagesPrinted/2) 
+    const newPageBalance = pageBalance - newPagesPrinted
+    setPagesPrinted(newPagesPrinted)
+    setPageBalance(newPageBalance)
+    // if(!singleSidePrinting)
+    // {
+      //   // change page balance for the client side
+      //     setPagesPrinted(Math.ceil(pagesPrinted/2))
+      //     setPageBalance(pageBalance-pagesPrinted)
+      // }
+    console.log("Printer Doc ID", selectedPrinterDocument.id);
+    console.log("File", file);
+    console.log("Receive Date Time", receiveDateTime);
+    console.log("Page Size", pageSize);
+    console.log ("How many pages to be printed? ",newPagesPrinted) // ? 
 		console.log("Printing Pages", printingPages);
 		console.log("Single Side Printing", singleSidePrinting);
 		console.log("Double Side Printing", doubleSidePrinting);
@@ -116,7 +122,8 @@ const PrintRequestContent = () => {
 			pageSize,
 			printingPages,
 			singleSidePrinting ? 1 : 2,
-			"Pending"
+			"Pending",
+      newPageBalance
 		);
 
 	};
