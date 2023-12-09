@@ -20,6 +20,7 @@ import dayjs from 'dayjs';
 import { usePrinter } from '../../contexts/PrinterContext.jsx';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { studentMapper } from '../../contexts/mapper/StudentMapper.jsx';
+import { ROUTES } from '../../contexts/RouteContext.jsx';
 
 
 const PrintRequestContent = () => {
@@ -359,14 +360,14 @@ const PrintRequestContent = () => {
       </Stack>
       {/*FOOTER*/}
       <Stack direction={'row'} sx={{ justifyContent: 'space-between', marginTop: '10px' }}>
-        <Link to={'/smart-printing-service/Payment'}>
+        <Link to={ROUTES.PAYMENT}>
           <Button variant='contained' sx={{ borderRadius: '20px', width: '160px' }}>
             Mua thêm
           </Button>
         </Link>
 
         <Stack direction={'row'} spacing={'34px'}>
-          <Link to={'/smart-printing-service'}>
+          <Link to={ROUTES.ROOT}>
             <Button variant='outlined' sx={{
               borderRadius: '20px',
               color: 'black',

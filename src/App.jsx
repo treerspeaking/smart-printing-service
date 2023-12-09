@@ -37,25 +37,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    // <BrowserRouter>
-    //   <AuthProvider>
-    //     <Routes>
-    //       {ErrorRoute.map((route, index) => (
-    //         <Route key={index} path={route.path} element={route.element} />
-    //       ))}
-    //       {AuthenticationRoutes.map((route, index) => (
-    //         <Route key={index} path={route.path} element={<LoginRoute children={route.element}/> } />
-    //       ))}
-    //       <Route path={RootRoute.path} element={RootRoute.element}>
-    //         <Route index element={<Navigate to={ROUTES["HOME"]} replace />} />
-    //         {RootRoute.children.map((route, index) => (
-    //           <Route key={index} path={route.path} element={<PrivateRoute children={route.element}/>} />
-    //         ))}
-    //         <Route path='/smart-printing-service/LogOut' ac={logoutaction} element={<>hello</>}/>
-    //       </Route>
-    //     </Routes>
-    //   </AuthProvider>
-    // </BrowserRouter>
+    
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
