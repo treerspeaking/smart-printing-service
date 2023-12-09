@@ -42,6 +42,7 @@ const PrintRequestContent = () => {
   const { currentUser } = useAuth();
   const { printerData } = usePrinter();
   const [pageBalance, setPageBalance] = useState();
+  const [balanceError,setPageBalanceError] = useState(false)
   // The number of pages that need to be printed 10
   const [pagesPrinted, setPagesPrinted] = useState(0);
   // state for in 2 mặt or in 1 mặt
@@ -101,9 +102,24 @@ const PrintRequestContent = () => {
     // A4 1 trang A3 2 trang
     const pageSizeMultiplier = pageSize === 'A4' ? 1 : 2
     let newPagesPrinted = pagesCountAfterSide * pageSizeMultiplier;
+    const temp = pageBalance
     const newPageBalance = pageBalance - newPagesPrinted
+
+    
     setPagesPrinted(newPagesPrinted)
-    setPageBalance(newPageBalance)
+    if(newPageBalance>0)
+    {
+      setPageBalance(newPageBalance)
+      setPageBalanceError(false)
+    }
+    else
+    {
+      
+      setPageBalanceError(true)
+      alert("Vượt quá giới hạn giấy!. Vui lòng mua thêm")
+      setOpen(false)
+      return 
+    }
     // if(!singleSidePrinting)
     // {
     //   // change page balance for the client side
@@ -155,11 +171,12 @@ const PrintRequestContent = () => {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
-    if(file&&selectedPrinterDocument&&printingPages)
+    if(file&&selectedPrinterDocument&&printingPages&&balanceError===false)
     {
 
       handlePrintRequest();
       setOpen(true);
+      
     }
       
     else
@@ -180,6 +197,12 @@ const PrintRequestContent = () => {
         {
           setPagesError(true)
         }
+        if(!balanceError)
+        {
+          alert("Vui long mua them giay")
+          return 
+        }
+        
     }
   }
   const handleClose = () => setOpen(false);
