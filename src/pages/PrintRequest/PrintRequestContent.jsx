@@ -146,7 +146,7 @@ const PrintRequestContent = () => {
         <Stack direction={'column'} sx={{marginLeft: '60px'}}>
             <Stack direction={'row'} sx={{justifyContent: 'space-between', alignItems: 'start'}}>
                 <Stack direction="column" spacing={3}>
-                    <Typography variant={'h3'} fontWeight={700}>
+                    <Typography variant={'h2'}>
                         YÊU CẦU IN
                     </Typography>
 					
