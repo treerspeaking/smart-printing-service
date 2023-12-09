@@ -129,7 +129,7 @@ const PrintRequestContent = () => {
       selectedPrinterDocument.id,
       currentUser.uid,
       file.name,
-      base64,
+      "", // used to be base64 but now we use the file url
       dayjs().toDate(),
       receiveDateTime.toDate(),
       pageSize,
