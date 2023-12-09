@@ -45,8 +45,9 @@ const PrintRequestContent = () => {
   // The number of pages that need to be printed 10
   const [pagesPrinted, setPagesPrinted] = useState(0);
   // state for in 2 mặt or in 1 mặt
-  const defaultReceiveDateTime = dayjs().add(1, 'day').hour(9).minute(0).second(0).millisecond(0);
+  const defaultReceiveDateTime = dayjs().add(1, 'day').hour(0).minute(0).second(0).millisecond(0);
   const [selectedPrinterDocument, setSelectedPrinterDocument] = useState(null);
+  const [selectedPrinterDocumentError, setSelectedPrinterDocumentError] = useState(false)
   // the size of the page A4 or A3
   const [pageSize, setPageSize] = useState('A4');
   // the pages that need to be printed 1,2,3,4
@@ -54,8 +55,10 @@ const PrintRequestContent = () => {
   const [pagesError, setPagesError] = useState(false);
   const [singleSidePrinting, setSingleSidePrinting] = useState(false);
   const [doubleSidePrinting, setDoubleSidePrinting] = useState(true);
-  const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime);
+  const [receiveDateTime, setReceiveDateTime] = useState(defaultReceiveDateTime); // ? THIS NEEDS TO SET NULL HA ? 
+  const [dateError,setDateError] = useState(null)
   const [file, setFile] = useState(null);
+  const [fileError, setFileError] = useState(false)
 
 
   const handleSingleSidePrintingChange = () => {
@@ -152,8 +155,32 @@ const PrintRequestContent = () => {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
-    handlePrintRequest();
-    setOpen(true);
+    if(file&&selectedPrinterDocument&&printingPages)
+    {
+
+      handlePrintRequest();
+      setOpen(true);
+    }
+      
+    else
+    {
+        if(!selectedPrinterDocument)
+        {
+          console.log("Vui long chon may in")
+          setSelectedPrinterDocumentError(true)
+          
+        }
+        if(!file)
+        {
+          setFileError(true)
+          console.log("Vui long tai? tep len")
+          alert("Vui long tai tep len")
+        }
+        if(!pagesPrinted)
+        {
+          setPagesError(true)
+        }
+    }
   }
   const handleClose = () => setOpen(false);
 
@@ -181,7 +208,7 @@ const PrintRequestContent = () => {
 
         <FindPrinters
           printers={printerData}
-
+          error={selectedPrinterDocumentError}
           selectedPrinterDocumentID={selectedPrinterDocument}
           onChange={(e) => setSelectedPrinterDocument(e.target.value)}
         />
@@ -229,18 +256,24 @@ const PrintRequestContent = () => {
 
           {!file
             ?
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "start" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "start" }} >
               <UploadFileIcon sx={{ height: 50, width: 50 }} />
               <Typography >Nhấp vào đây để thêm tệp</Typography>
               {/* TODO: Get the accepted file types from the backend first before this */}
+              {fileError && <Typography style={{ color: 'red' }}>{fileError}</Typography>}
               <input
                 type="file"
+                required = {true}
                 hidden
+                error={fileError}
                 accept=".pdf , .docx , .doc , .pptx , .ppt , .xlsx , .xls"
+                
+                helperText={fileError&&"asdasdasd"}
                 onChange={(e) => {
                   setFile(e.target.files[0])
                 }}
               />
+              
             </div>
             :
             <div sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
@@ -282,6 +315,8 @@ const PrintRequestContent = () => {
               helperText={pagesError && "Chỉ chấp nhận các con số được cách bởi đấu phẩy"}
               onChange={handlePagesInput}
               placeholder="Nhập các trang (v.d., 1, 2, 3)"
+              required={true}
+              
             />
             <FileCopyIcon
               sx={{ margin: 2 }}
