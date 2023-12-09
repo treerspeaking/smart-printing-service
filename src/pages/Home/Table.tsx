@@ -207,9 +207,9 @@ export default function ColumnGroupingTable() {
                             </TableCell>
                         </TableRow>
                         <TableRow>
-                            {columns.map((column) => (
+                            {columns.map((column, index) => (
                                 <TableCell
-                                    key={column.id}
+                                    key={index}
                                     align={column.align}
                                     style={{ top: 57, minWidth: column.minWidth, fontWeight: 'bold' }}
                                 >
@@ -225,10 +225,10 @@ export default function ColumnGroupingTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {sortedRows.map((row) => (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={row.ngayNhan}>
-                                {columns.map((column) => (
-                                    <TableCell key={column.id} align={column.align}>
+                        {sortedRows.map((row, index) => (
+                            <TableRow hover role="checkbox" tabIndex={-1} key={row.ngayNhan + `${index}`}>
+                                {columns.map((column, index) => (
+                                    <TableCell key={index} align={column.align}>
                                         {column.id === "tinhTrang"
                                             ?
                                             (<Typography color={row.tinhTrang === 'Hoàn thành' ? 'green' : row.tinhTrang === 'Chưa hoàn thành' ? 'red' : 'orange'}>
