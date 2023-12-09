@@ -14,6 +14,8 @@ function fetch_and_compile() {
     # Page index is zero based
     for ((i = 0; i <= $count - 1; i++)); do
         eval "$drawio --export --crop --transparent --page-index $i --output "${names[i]}.pdf" --format "pdf" "${1}.drawio""
+        echo "$drawio --export --crop --transparent --page-index $i --output "${names[i]}.pdf" --format "pdf" "${1}.drawio""
+        echo $i
     done
 }
 
