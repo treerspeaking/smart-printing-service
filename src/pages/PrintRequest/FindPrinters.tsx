@@ -34,7 +34,7 @@ const FindPrinters = ({ onChange, selectedPrinterDocumentID, printers,error }) =
       select
       label="Máy in"
       error={error}
-      helperText={error&&"In máy nào????"}
+      helperText={error&&"Vui lòng chọn máy in"}
       value={selectedPrinterDocumentID}  // Change this prop name
       onChange={handlePrinterChange}
       sx={{ marginLeft: '100px', width: 100 }}
