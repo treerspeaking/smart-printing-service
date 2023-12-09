@@ -29,9 +29,7 @@ export default function PaymentContent() {
     <Stack direction={'column'} sx={{ display: 'flex' }}>
       <Stack direction={'row'} spacing={2} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
         <Stack direction={'row'}>
-
-          <StickyNote2Icon sx={{ width: '65px', height: '59px' }} />
-          <Typography variant='h3'>Mua giấy A4</Typography>
+          <Typography variant='h2'>MUA GIẤY</Typography>
 
         </Stack>
 

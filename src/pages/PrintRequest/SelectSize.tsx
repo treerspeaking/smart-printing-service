@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { TextField } from '@mui/material';
 
-const sizes = ["A1", "A2", "A3", "A4", "A5"];
+const sizes = [ "A3", "A4"];
 
 interface Props {
   defaultValue: string;

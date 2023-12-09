@@ -33,8 +33,8 @@ interface Column {
 }
 
 const columns: Column[] = [
-    { id: 'ngayNhan', label: 'Ngày nhận', minWidth: 170 },
-    { id: 'ngayDat', label: 'Ngày đặt', minWidth: 100 },
+    { id: 'ngayNhan', label: 'Ngày đặt', minWidth: 170 },
+    { id: 'ngayDat', label: 'Ngày nhận', minWidth: 100 },
     {
         id: 'tenFile',
         label: 'Tên file',
@@ -114,6 +114,7 @@ export default function ColumnGroupingTable() {
     const {printerData, fetchPrinterData} = usePrinter();
 
     const [tableRows, setTableRows] = React.useState<Data[]>([]);
+    // const [tableRows, setTableRows] = [parentTableRows, setParentTableRows];
     
 
     const findPrinterFromData = async (PrinterDocumentID) => {
@@ -206,9 +207,9 @@ export default function ColumnGroupingTable() {
                             </TableCell>
                         </TableRow>
                         <TableRow>
-                            {columns.map((column) => (
+                            {columns.map((column, index) => (
                                 <TableCell
-                                    key={column.id}
+                                    key={index}
                                     align={column.align}
                                     style={{ top: 57, minWidth: column.minWidth, fontWeight: 'bold' }}
                                 >
@@ -224,10 +225,10 @@ export default function ColumnGroupingTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {sortedRows.map((row) => (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={row.ngayNhan}>
-                                {columns.map((column) => (
-                                    <TableCell key={column.id} align={column.align}>
+                        {sortedRows.map((row, index) => (
+                            <TableRow hover role="checkbox" tabIndex={-1} key={row.ngayNhan + `${index}`}>
+                                {columns.map((column, index) => (
+                                    <TableCell key={index} align={column.align}>
                                         {column.id === "tinhTrang"
                                             ?
                                             (<Typography color={row.tinhTrang === 'Hoàn thành' ? 'green' : row.tinhTrang === 'Chưa hoàn thành' ? 'red' : 'orange'}>

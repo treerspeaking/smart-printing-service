@@ -9,15 +9,15 @@ import { NotFound } from '../components/404NotFound'
 
 
 export const ROUTES = {
-  LOGIN: "/smart-printing-service/login",
-  NOT_FOUND: "/smart-printing-service/*",
-  ROOT: "/smart-printing-service",
-  HOME: "/smart-printing-service/Home",
-  HISTORY: "/smart-printing-service/HistoryLog",
-  PAYMENT: "/smart-printing-service/Payment",
-  FEEDBACK: "/smart-printing-service/Feedback",
-  PRINT_REQUEST: "/smart-printing-service/PrintRequest",
-  LOGOUT: "/smart-printing-service/LogOut",
+  LOGIN: "/login",
+  NOT_FOUND: "/*",
+  ROOT: "",
+  HOME: "/Home",
+  HISTORY: "/HistoryLog",
+  PAYMENT: "/Payment",
+  FEEDBACK: "/Feedback",
+  PRINT_REQUEST: "/PrintRequest",
+  LOGOUT: "/LogOut",
   // Add more routes here...
 };
 

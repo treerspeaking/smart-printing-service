@@ -13,14 +13,14 @@ import { TextField } from '@mui/material';
 
 import { useState } from 'react';
 
-interface Props {
+// interface Props {
 
-  selectedPrinterDocumentID: string;
-  printers: string[];
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+//   selectedPrinterDocumentID: string;
+//   printers: string[];
+//   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+// }
 
-const FindPrinters = ({ onChange, selectedPrinterDocumentID, printers }) => {
+const FindPrinters = ({ onChange, selectedPrinterDocumentID, printers,error }) => {
   const handlePrinterChange = (event) => {
     console.log(event.target.value);
     if (event.target && 'value' in event.target) {
@@ -33,7 +33,8 @@ const FindPrinters = ({ onChange, selectedPrinterDocumentID, printers }) => {
       id="select-printers"
       select
       label="Máy in"
-      
+      error={error}
+      helperText={error&&"Vui lòng chọn máy in"}
       value={selectedPrinterDocumentID}  // Change this prop name
       onChange={handlePrinterChange}
       sx={{ marginLeft: '100px', width: 100 }}
