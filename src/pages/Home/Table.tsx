@@ -114,6 +114,7 @@ export default function ColumnGroupingTable() {
     const {printerData, fetchPrinterData} = usePrinter();
 
     const [tableRows, setTableRows] = React.useState<Data[]>([]);
+    // const [tableRows, setTableRows] = [parentTableRows, setParentTableRows];
     
 
     const findPrinterFromData = async (PrinterDocumentID) => {
