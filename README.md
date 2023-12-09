@@ -14,6 +14,7 @@ We used Firebase in our project because aside from its feasibility to connect an
 
 
 ## How to use the application
+Visit: [https://smart-printing-service-23a0d.web.app](https://smart-printing-service-23a0d.web.app)  
 You can login with a pre-existing account  
 - Email: admin@hcmut.edu.vn  
 - Password: 123456
