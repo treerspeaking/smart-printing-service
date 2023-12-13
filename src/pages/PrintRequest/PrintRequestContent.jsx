@@ -38,6 +38,7 @@ const PrintRequestContent = () => {
     else {
       setPagesError(true);
     }
+    
   };
 
   const { currentUser } = useAuth();
@@ -61,7 +62,7 @@ const PrintRequestContent = () => {
   const [dateError,setDateError] = useState(null)
   const [file, setFile] = useState(null);
   const [fileError, setFileError] = useState(false)
-
+  const [open, setOpen] = React.useState(false);
 
   const handleSingleSidePrintingChange = () => {
     setSingleSidePrinting(true);
@@ -104,11 +105,12 @@ const PrintRequestContent = () => {
     const pageSizeMultiplier = pageSize === 'A4' ? 1 : 2
     let newPagesPrinted = pagesCountAfterSide * pageSizeMultiplier;
     
-    const newPageBalance = pageBalance - newPagesPrinted
+    let temp = pageBalance
+    let newPageBalance = pageBalance - newPagesPrinted
 
     
     setPagesPrinted(newPagesPrinted)
-    if(newPageBalance>0)
+    if(newPageBalance >= 0)
     {
       setPageBalance(newPageBalance)
       setPageBalanceError(false)
@@ -117,8 +119,9 @@ const PrintRequestContent = () => {
     {
       
       setPageBalanceError(true)
-      alert("Vượt quá giới hạn giấy!. Vui lòng mua thêm")
-      setOpen(false)
+      newPageBalance = temp;
+     
+      
       
     }
     // if(!singleSidePrinting)
@@ -169,44 +172,43 @@ const PrintRequestContent = () => {
 
 
   //on confirm print box 
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    if(!balanceError) 
-    {
-      alert("Vui long mua them giay")
-      return
+  useEffect(() => {
+    // Check for balance error when it changes
+    if (balanceError) {
+      setOpen(false);
+      // You can add additional handling for balance error, e.g., showing an alert
+      alert("Vượt quá giới hạn giấy!. Vui lòng mua thêm");
     }
-    if(file&&selectedPrinterDocument&&printingPages)
-    {
-
+  }, [balanceError]);
+  const handleOpen = () => {
+    
+      if(balanceError === true)
+      {
+        alert("VUI LONG MUA THEM GIAY")
+        
+        return 
+      }
+    
+    
+    if (file && selectedPrinterDocument && printingPages) {
       handlePrintRequest();
       setOpen(true);
-      
+    } else {
+      if (!selectedPrinterDocument) {
+        console.log("Vui long chon may in");
+        setSelectedPrinterDocumentError(true);
+      }
+      if (!file) {
+        setFileError(true);
+        console.log("Vui long tai? tep len");
+        alert("Vui long tai tep len");
+      }
+      if (!pagesPrinted) {
+        setPagesError(true);
+      }
     }
-      
-    else
-    {
-        if(!selectedPrinterDocument)
-        {
-          console.log("Vui long chon may in")
-          setSelectedPrinterDocumentError(true)
-          
-        }
-        if(!file)
-        {
-          setFileError(true)
-          console.log("Vui long tai? tep len")
-          alert("Vui long tai tep len")
-        }
-        if(!pagesPrinted)
-        {
-          setPagesError(true)
-        }
-        
-        
-    }
-  }
+  };
+  
   const handleClose = () => setOpen(false);
 
 
